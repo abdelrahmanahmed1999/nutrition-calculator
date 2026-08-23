@@ -234,10 +234,6 @@
                         placeholder="بحث عن منتج..."
                     >
 
-                    <button type="button" id="saveJsonButton" class="btn btn-success">
-                        تنزيل nutrition.json
-                    </button>
-
                 </div>
 
                 <div id="nutritionsTables"></div>
@@ -268,7 +264,6 @@ const carbsResult = document.getElementById('carbsResult');
 const nutritionNote = document.getElementById('nutritionNote');
 const nutritionsTables = document.getElementById('nutritionsTables');
 const searchNutrition = document.getElementById('searchNutrition');
-const saveJsonButton = document.getElementById('saveJsonButton');
 
 
 /*
@@ -296,6 +291,23 @@ function escapeHtml(value) {
         .replaceAll('>', '&gt;')
         .replaceAll('"', '&quot;')
         .replaceAll("'", '&#039;');
+}
+
+async function apiRequest(body) {
+
+    const response = await fetch('api.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw new Error(result.error || 'تعذر حفظ البيانات');
+    }
+
+    return result;
 }
 
 function readFoodRow(row) {
@@ -647,21 +659,21 @@ function renderNutritionsTable(search = '') {
 
 }
 
-function updateFood(category, index, food) {
+async function updateFood(category, index, food) {
 
     if (!food.name) {
         alert('اسم المنتج مطلوب');
         return false;
     }
 
+    await apiRequest({ action: 'update', category, index, ...food });
     nutritionsData[category][index] = food;
-    loadCategories();
     loadFoods();
     renderNutritionsTable(searchNutrition.value);
     return true;
 }
 
-nutritionsTables.addEventListener('click', function (event) {
+nutritionsTables.addEventListener('click', async function (event) {
 
     const button = event.target.closest('button');
 
@@ -709,50 +721,37 @@ nutritionsTables.addEventListener('click', function (event) {
                 alert('اسم المنتج مطلوب');
                 return;
             }
-            nutritionsData[rowCategory].push(food);
-            loadCategories();
-            loadFoods();
-            renderNutritionsTable(searchNutrition.value);
+            try {
+                await apiRequest({ action: 'create', category: rowCategory, ...food });
+                nutritionsData[rowCategory].push(food);
+                loadFoods();
+                renderNutritionsTable(searchNutrition.value);
+            } catch (error) {
+                alert(error.message);
+            }
             return;
         }
 
-        updateFood(rowCategory, index, food);
+        try {
+            await updateFood(rowCategory, index, food);
+        } catch (error) {
+            alert(error.message);
+        }
         return;
     }
 
     if (button.classList.contains('delete-food')) {
         if (confirm('هل تريد حذف هذا المنتج؟')) {
-            nutritionsData[rowCategory].splice(index, 1);
-            loadCategories();
-            loadFoods();
-            renderNutritionsTable(searchNutrition.value);
+            try {
+                await apiRequest({ action: 'delete', category: rowCategory, index });
+                nutritionsData[rowCategory].splice(index, 1);
+                loadFoods();
+                renderNutritionsTable(searchNutrition.value);
+            } catch (error) {
+                alert(error.message);
+            }
         }
     }
-
-});
-
-async function saveNutritionJson() {
-
-    const json = JSON.stringify({ categories: nutritionsData }, null, 2);
-
-    const blob = new Blob([json], { type: 'application/json' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'nutrition.json';
-    link.style.display = 'none';
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    setTimeout(() => URL.revokeObjectURL(link.href), 1000);
-    alert('تم تنزيل nutrition.json. ارفع الملف الجديد إلى GitHub لاستبدال الملف القديم.');
-}
-
-saveJsonButton.addEventListener('click', function () {
-
-    saveNutritionJson().catch(error => {
-        console.error(error);
-        alert('تعذر حفظ الملف. تأكد من السماح باختيار الملفات.');
-    });
 
 });
 
@@ -776,13 +775,13 @@ searchNutrition.addEventListener('input', function () {
 |--------------------------------------------------------------------------
 */
 
-fetch('nutrition.json')
+fetch('api.php')
 
     .then(response => {
 
         if (!response.ok) {
 
-            throw new Error('Cannot load nutritions.json');
+            throw new Error('Cannot load nutrition data');
 
         }
 
