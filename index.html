@@ -336,6 +336,48 @@ const dailyTotals = {
     carbs: document.getElementById('dailyCarbsTotal')
 };
 
+function getDailyStorageKey() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const today = `${year}-${month}-${day}`;
+    return `nutrition-daily-${today}`;
+}
+
+function loadSavedDailyRows() {
+
+    try {
+        const savedRows = JSON.parse(localStorage.getItem(getDailyStorageKey()) || '[]');
+        return Array.isArray(savedRows) ? savedRows : [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function saveDailyRows() {
+
+    const rows = [...dailyRows.querySelectorAll('tr')].map(row => {
+        const category = row.querySelector('.daily-category').value;
+        const productIndex = row.querySelector('.daily-nutrition').value;
+        const nutrition = category && productIndex !== '' && nutritionsData[category]
+            ? nutritionsData[category][productIndex]
+            : null;
+
+        return {
+            category,
+            nutritionName: nutrition ? nutrition.name : '',
+            grams: row.querySelector('.daily-grams').value
+        };
+    });
+
+    try {
+        localStorage.setItem(getDailyStorageKey(), JSON.stringify(rows));
+    } catch (error) {
+        console.error('تعذر حفظ أكل اليوم', error);
+    }
+}
+
 
 /*
 |--------------------------------------------------------------------------
@@ -605,10 +647,38 @@ function createDailyRow() {
 function renderDailyRows() {
 
     dailyRows.innerHTML = '';
+    const savedRows = loadSavedDailyRows();
+    const rowsCount = Math.max(3, savedRows.length);
 
-    for (let index = 0; index < 3; index++) {
+    for (let index = 0; index < rowsCount; index++) {
         dailyRows.appendChild(createDailyRow());
     }
+
+    savedRows.forEach((savedRow, index) => {
+        const row = dailyRows.querySelectorAll('tr')[index];
+        const category = row.querySelector('.daily-category');
+        const product = row.querySelector('.daily-nutrition');
+        const grams = row.querySelector('.daily-grams');
+
+        if (!savedRow.category || !nutritionsData[savedRow.category]) {
+            return;
+        }
+
+        category.value = savedRow.category;
+        updateDailyProductSelect(row);
+
+        const productIndex = nutritionsData[savedRow.category].findIndex(
+            nutrition => nutrition.name === savedRow.nutritionName
+        );
+
+        if (productIndex === -1) {
+            return;
+        }
+
+        product.value = productIndex;
+        grams.value = savedRow.grams || '';
+        grams.disabled = false;
+    });
 
     updateDailyRows();
 }
@@ -685,6 +755,7 @@ dailyRows.addEventListener('change', function (event) {
 
     if (event.target.classList.contains('daily-category')) {
         updateDailyProductSelect(row);
+        saveDailyRows();
         return;
     }
 
@@ -692,6 +763,7 @@ dailyRows.addEventListener('change', function (event) {
         row.querySelector('.daily-grams').value = '';
         row.querySelector('.daily-grams').disabled = event.target.value === '';
         updateDailyRows();
+        saveDailyRows();
     }
 });
 
@@ -699,12 +771,14 @@ dailyRows.addEventListener('input', function (event) {
 
     if (event.target.classList.contains('daily-grams')) {
         updateDailyRows();
+        saveDailyRows();
     }
 });
 
 addDailyRowButton.addEventListener('click', function () {
     dailyRows.appendChild(createDailyRow());
     updateDailyRows();
+    saveDailyRows();
 });
 
 dailyRows.addEventListener('click', function (event) {
@@ -715,6 +789,7 @@ dailyRows.addEventListener('click', function (event) {
 
     event.target.closest('tr').remove();
     updateDailyRows();
+    saveDailyRows();
 });
 
 
