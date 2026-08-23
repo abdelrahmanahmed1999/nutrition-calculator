@@ -235,7 +235,7 @@
                     >
 
                     <button type="button" id="saveJsonButton" class="btn btn-success">
-                        حفظ في nutrition.json
+                        تنزيل nutrition.json
                     </button>
 
                 </div>
@@ -255,7 +255,6 @@
 <script>
 
 let nutritionsData = {};
-let nutritionFileHandle = null;
 
 const categorySelect = document.getElementById('category');
 const nutritionSelect = document.getElementById('nutrition');
@@ -736,29 +735,16 @@ async function saveNutritionJson() {
 
     const json = JSON.stringify({ categories: nutritionsData }, null, 2);
 
-    if (window.showSaveFilePicker) {
-        nutritionFileHandle = nutritionFileHandle || await window.showSaveFilePicker({
-            suggestedName: 'nutrition.json',
-            types: [{
-                description: 'JSON files',
-                accept: { 'application/json': ['.json'] }
-            }]
-        });
-
-        const writable = await nutritionFileHandle.createWritable();
-        await writable.write(json);
-        await writable.close();
-        alert('تم حفظ التغييرات في nutrition.json');
-        return;
-    }
-
     const blob = new Blob([json], { type: 'application/json' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
     link.download = 'nutrition.json';
+    link.style.display = 'none';
+    document.body.appendChild(link);
     link.click();
-    URL.revokeObjectURL(link.href);
-    alert('تم تنزيل ملف nutrition.json المعدل. استبدل الملف القديم به.');
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+    alert('تم تنزيل nutrition.json. ارفع الملف الجديد إلى GitHub لاستبدال الملف القديم.');
 }
 
 saveJsonButton.addEventListener('click', function () {
