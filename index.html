@@ -100,7 +100,7 @@
                     data-bs-toggle="tab"
                     data-bs-target="#calculator"
                     type="button">
-                الحسبة
+                حساب السعرارات
             </button>
         </li>
 
@@ -121,6 +121,16 @@
                     data-bs-target="#daily"
                     type="button">
                 أكلت النهارده
+            </button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+            <button class="nav-link"
+                    id="needs-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#needs"
+                    type="button">
+                حساب الاحتياجات
             </button>
         </li>
 
@@ -271,6 +281,116 @@
 
         </div>
 
+        <!-- ==================== Needs Calculator ==================== -->
+
+        <div class="tab-pane fade" id="needs">
+
+            <div class="card main-card p-3 p-md-4">
+
+                <h4 class="mb-1">حساب الاحتياجات اليومية</h4>
+                <p class="text-muted mb-4">أدخل بياناتك لمعرفة احتياجك من السعرات والمغذيات</p>
+
+                <div class="row g-3">
+                    <div class="col-12 col-md-4">
+                        <label for="needsWeight" class="form-label fw-bold">الوزن بالكجم</label>
+                        <input type="number" id="needsWeight" class="form-control" min="1" step="0.1" placeholder="مثال: 72">
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="needsHeight" class="form-label fw-bold">الطول بالسم</label>
+                        <input type="number" id="needsHeight" class="form-control" min="1" step="0.1" placeholder="مثال: 175">
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="needsAge" class="form-label fw-bold">العمر بالسنوات</label>
+                        <input type="number" id="needsAge" class="form-control" min="1" step="1" placeholder="مثال: 25">
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <label for="needsActivity" class="form-label fw-bold">مستوى النشاط</label>
+                    <select id="needsActivity" class="form-select">
+                        <option value="1.2">قليل جدًا (مكتب + بدون رياضة)</option>
+                        <option value="1.35">نشاط خفيف (تمرين 1–3 مرات أسبوعيًا)</option>
+                        <option value="1.45">نشاط متوسط (تمرين 3–4 مرات أسبوعيًا)</option>
+                        <option value="1.55">نشاط جيد (تمرين 4–5 أيام أسبوعيًا)</option>
+                    </select>
+                </div>
+
+                <div class="row g-3 mt-2">
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="card result-card p-3 text-center">
+                            <div class="result-label">BMR</div>
+                            <div id="needsBmr" class="result-number">0</div>
+                            <small>سعر حراري</small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="card result-card p-3 text-center">
+                            <div class="result-label">السعرات حسب النشاط</div>
+                            <div id="needsCalories" class="result-number">0</div>
+                            <small>سعر حراري يوميًا</small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="card result-card p-3 text-center">
+                            <div class="result-label">البروتين</div>
+                            <div id="needsProtein" class="result-number">0</div>
+                            <small>115–158 جم تقريبًا</small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="card result-card p-3 text-center">
+                            <div class="result-label">الدهون</div>
+                            <div id="needsFat" class="result-number">0</div>
+                            <small>جم يوميًا</small>
+                        </div>
+                    </div>
+                </div>
+
+                <h5 class="mt-4">السعرات حسب مستوى النشاط</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered nutrition-table">
+                        <thead class="table-light">
+                            <tr>
+                                <th>النشاط</th>
+                                <th>المعامل</th>
+                                <th>السعرات اليومية</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>قليل جدًا (مكتب + بدون رياضة)</td><td>1.2</td><td id="needsActivityCalories12">-</td></tr>
+                            <tr><td>نشاط خفيف (تمرين 1–3 مرات أسبوعيًا)</td><td>1.35</td><td id="needsActivityCalories135">-</td></tr>
+                            <tr><td>نشاط متوسط (تمرين 3–4 مرات أسبوعيًا)</td><td>1.45</td><td id="needsActivityCalories145">-</td></tr>
+                            <tr><td>نشاط جيد (تمرين 4–5 أيام أسبوعيًا)</td><td>1.55</td><td id="needsActivityCalories155">-</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr class="my-4">
+
+                <h5>احتياج الكارب حسب النظام</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered nutrition-table">
+                        <thead class="table-light">
+                            <tr>
+                                <th>النظام</th>
+                                <th>الجرام لكل كجم</th>
+                                <th>الكمية اليومية</th>
+                                <th>الاستخدام</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>منخفض جدًا (Very Low Carb)</td><td>0.5–1.0</td><td id="needsCarbsVeryLow">-</td><td>للتنشيف القاسي أو الأنظمة الشبيهة بالكيتو</td></tr>
+                            <tr><td>منخفض (Low Carb)</td><td>1.5</td><td id="needsCarbsLow">-</td><td>مناسب للتنشيف أو أيام الراحة</td></tr>
+                            <tr><td>متوسط (Moderate Carb)</td><td>2.0–2.5</td><td id="needsCarbsModerate">-</td><td>مناسب للطاقة والحفاظ على العضلات</td></tr>
+                            <tr><td>مرتفع (High Carb)</td><td>3.0–4.0</td><td id="needsCarbsHigh">-</td><td>للبناء العضلي أو أيام إعادة التعبئة</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
         <!-- ==================== All Foods ==================== -->
 
         <div class="tab-pane fade" id="nutritions">
@@ -328,6 +448,24 @@ const searchNutrition = document.getElementById('searchNutrition');
 const saveJsonButton = document.getElementById('saveJsonButton');
 const dailyRows = document.getElementById('dailyRows');
 const addDailyRowButton = document.getElementById('addDailyRow');
+const needsWeight = document.getElementById('needsWeight');
+const needsHeight = document.getElementById('needsHeight');
+const needsAge = document.getElementById('needsAge');
+const needsActivity = document.getElementById('needsActivity');
+const needsBmr = document.getElementById('needsBmr');
+const needsCalories = document.getElementById('needsCalories');
+const needsProtein = document.getElementById('needsProtein');
+const needsFat = document.getElementById('needsFat');
+const needsCarbsVeryLow = document.getElementById('needsCarbsVeryLow');
+const needsCarbsLow = document.getElementById('needsCarbsLow');
+const needsCarbsModerate = document.getElementById('needsCarbsModerate');
+const needsCarbsHigh = document.getElementById('needsCarbsHigh');
+const needsActivityCalories = {
+    '1.2': document.getElementById('needsActivityCalories12'),
+    '1.35': document.getElementById('needsActivityCalories135'),
+    '1.45': document.getElementById('needsActivityCalories145'),
+    '1.55': document.getElementById('needsActivityCalories155')
+};
 
 const dailyTotals = {
     calories: document.getElementById('dailyCaloriesTotal'),
@@ -335,6 +473,41 @@ const dailyTotals = {
     fat: document.getElementById('dailyFatTotal'),
     carbs: document.getElementById('dailyCarbsTotal')
 };
+
+function calculateNeeds() {
+
+    const weight = Number(needsWeight.value);
+    const height = Number(needsHeight.value);
+    const age = Number(needsAge.value);
+
+    if (!weight || !height || !age || weight <= 0 || height <= 0 || age <= 0) {
+        [needsBmr, needsCalories, needsProtein, needsFat].forEach(result => result.textContent = '0');
+        [needsCarbsVeryLow, needsCarbsLow, needsCarbsModerate, needsCarbsHigh]
+            .forEach(result => result.textContent = '-');
+        Object.values(needsActivityCalories).forEach(result => result.textContent = '-');
+        return;
+    }
+
+    const bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+    const activityCalories = bmr * Number(needsActivity.value);
+
+    needsBmr.textContent = formatNumber(bmr);
+    needsCalories.textContent = formatNumber(activityCalories);
+    needsProtein.textContent = `${formatNumber(weight * 1.6)}–${formatNumber(weight * 2.2)}`;
+    needsFat.textContent = formatNumber(weight * 0.8);
+    Object.entries(needsActivityCalories).forEach(([factor, result]) => {
+        result.textContent = formatNumber(bmr * Number(factor));
+    });
+    needsCarbsVeryLow.textContent = `${formatNumber(weight * 0.5)}–${formatNumber(weight * 1)} جم`;
+    needsCarbsLow.textContent = `${formatNumber(weight * 1.5)} جم`;
+    needsCarbsModerate.textContent = `${formatNumber(weight * 2)}–${formatNumber(weight * 2.5)} جم`;
+    needsCarbsHigh.textContent = `${formatNumber(weight * 3)}–${formatNumber(weight * 4)} جم`;
+}
+
+[needsWeight, needsHeight, needsAge, needsActivity].forEach(input => {
+    input.addEventListener('input', calculateNeeds);
+    input.addEventListener('change', calculateNeeds);
+});
 
 function getDailyStorageKey() {
     const date = new Date();
