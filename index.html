@@ -114,6 +114,16 @@
             </button>
         </li>
 
+        <li class="nav-item" role="presentation">
+            <button class="nav-link"
+                    id="daily-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#daily"
+                    type="button">
+                أكلت النهارده
+            </button>
+        </li>
+
     </ul>
 
     <div class="tab-content">
@@ -214,6 +224,53 @@
 
         </div>
 
+        <!-- ==================== Daily Intake ==================== -->
+
+        <div class="tab-pane fade" id="daily">
+
+            <div class="card main-card p-3 p-md-4">
+
+                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                    <div>
+                        <h4 class="mb-1">أكلت النهارده</h4>
+                        <div class="text-muted">اختار كل منتج واكتب الكمية التي أكلتها بالجرام</div>
+                    </div>
+                    <button type="button" id="addDailyRow" class="btn btn-primary">إضافة صنف</button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered nutrition-table align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>القسم</th>
+                                <th>المنتج</th>
+                                <th>الجرام</th>
+                                <th>السعرات</th>
+                                <th>البروتين</th>
+                                <th>الدهون</th>
+                                <th>الكارب</th>
+                                <th>إجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dailyRows"></tbody>
+                        <tfoot class="table-light fw-bold">
+                            <tr>
+                                <th colspan="4">الإجمالي</th>
+                                <th id="dailyCaloriesTotal">0</th>
+                                <th id="dailyProteinTotal">0</th>
+                                <th id="dailyFatTotal">0</th>
+                                <th id="dailyCarbsTotal">0</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
         <!-- ==================== All Foods ==================== -->
 
         <div class="tab-pane fade" id="nutritions">
@@ -269,6 +326,15 @@ const nutritionNote = document.getElementById('nutritionNote');
 const nutritionsTables = document.getElementById('nutritionsTables');
 const searchNutrition = document.getElementById('searchNutrition');
 const saveJsonButton = document.getElementById('saveJsonButton');
+const dailyRows = document.getElementById('dailyRows');
+const addDailyRowButton = document.getElementById('addDailyRow');
+
+const dailyTotals = {
+    calories: document.getElementById('dailyCaloriesTotal'),
+    protein: document.getElementById('dailyProteinTotal'),
+    fat: document.getElementById('dailyFatTotal'),
+    carbs: document.getElementById('dailyCarbsTotal')
+};
 
 
 /*
@@ -508,6 +574,148 @@ function calculate() {
     }
 
 }
+
+function createDailyRow() {
+
+    const row = document.createElement('tr');
+
+    row.innerHTML = `
+        <th class="daily-row-number"></th>
+        <td><select class="form-select daily-category"><option value="">-- اختر القسم --</option></select></td>
+        <td><select class="form-select daily-nutrition" disabled><option value="">-- اختر المنتج --</option></select></td>
+        <td><input class="form-control daily-grams" type="number" min="0" step="0.1" placeholder="مثال: 75" disabled></td>
+        <td class="daily-calories">-</td>
+        <td class="daily-protein">-</td>
+        <td class="daily-fat">-</td>
+        <td class="daily-carbs">-</td>
+        <td><button type="button" class="btn btn-sm btn-outline-danger remove-daily-row">حذف</button></td>
+    `;
+
+    const categorySelect = row.querySelector('.daily-category');
+    Object.keys(nutritionsData).forEach(category => {
+        const option = document.createElement('option');
+        option.value = category;
+        option.textContent = category;
+        categorySelect.appendChild(option);
+    });
+
+    return row;
+}
+
+function renderDailyRows() {
+
+    dailyRows.innerHTML = '';
+
+    for (let index = 0; index < 3; index++) {
+        dailyRows.appendChild(createDailyRow());
+    }
+
+    updateDailyRows();
+}
+
+function updateDailyProductSelect(row) {
+
+    const category = row.querySelector('.daily-category').value;
+    const productSelect = row.querySelector('.daily-nutrition');
+    const grams = row.querySelector('.daily-grams');
+
+    productSelect.innerHTML = '<option value="">-- اختر المنتج --</option>';
+    grams.value = '';
+    grams.disabled = true;
+
+    if (!category || !nutritionsData[category]) {
+        productSelect.disabled = true;
+        updateDailyRows();
+        return;
+    }
+
+    nutritionsData[category].forEach((nutrition, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = nutrition.name;
+        productSelect.appendChild(option);
+    });
+
+    productSelect.disabled = false;
+    updateDailyRows();
+}
+
+function updateDailyRows() {
+
+    const totals = { calories: 0, protein: 0, fat: 0, carbs: 0 };
+
+    [...dailyRows.querySelectorAll('tr')].forEach((row, index) => {
+
+        row.querySelector('.daily-row-number').textContent = index + 1;
+
+        const category = row.querySelector('.daily-category').value;
+        const productIndex = row.querySelector('.daily-nutrition').value;
+        const grams = Number(row.querySelector('.daily-grams').value);
+        const nutrition = category && productIndex !== '' && nutritionsData[category]
+            ? nutritionsData[category][productIndex]
+            : null;
+
+        const values = {};
+        ['calories', 'protein', 'fat', 'carbs'].forEach(key => {
+            const value = nutrition && nutrition[key] !== null && nutrition[key] !== undefined && grams > 0
+                ? nutrition[key] * grams / 100
+                : null;
+            values[key] = value;
+            row.querySelector(`.daily-${key}`).innerHTML = value === null ? '-' : formatNumber(value);
+            if (value !== null) {
+                totals[key] += value;
+            }
+        });
+
+        row.querySelector('.daily-grams').disabled = !nutrition;
+    });
+
+    Object.keys(dailyTotals).forEach(key => {
+        dailyTotals[key].textContent = formatNumber(totals[key]);
+    });
+}
+
+dailyRows.addEventListener('change', function (event) {
+
+    const row = event.target.closest('tr');
+
+    if (!row) {
+        return;
+    }
+
+    if (event.target.classList.contains('daily-category')) {
+        updateDailyProductSelect(row);
+        return;
+    }
+
+    if (event.target.classList.contains('daily-nutrition')) {
+        row.querySelector('.daily-grams').value = '';
+        row.querySelector('.daily-grams').disabled = event.target.value === '';
+        updateDailyRows();
+    }
+});
+
+dailyRows.addEventListener('input', function (event) {
+
+    if (event.target.classList.contains('daily-grams')) {
+        updateDailyRows();
+    }
+});
+
+addDailyRowButton.addEventListener('click', function () {
+    dailyRows.appendChild(createDailyRow());
+    updateDailyRows();
+});
+
+dailyRows.addEventListener('click', function (event) {
+
+    if (!event.target.classList.contains('remove-daily-row')) {
+        return;
+    }
+
+    event.target.closest('tr').remove();
+    updateDailyRows();
+});
 
 
 /*
@@ -795,6 +1003,7 @@ fetch('nutrition.json')
         nutritionsData = data.categories;
 
         loadCategories();
+        renderDailyRows();
 
         renderNutritionsTable();
 
