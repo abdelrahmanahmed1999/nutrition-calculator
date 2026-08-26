@@ -113,6 +113,224 @@
           "after": "43.6"
         }
       }
+    },
+    {
+      "name": "النظام الاول",
+      "duration": "4شهور و اسبوعين من تاريخ 11/1/2026 الى 25/5/2026",
+      "mealCount": 5,
+      "meals": [
+        {
+          "name": "وجبة 1 الفطار الساعة 7.5am",
+          "foods": [
+            {
+              "category": "نشويات",
+              "nutritionName": "عيش شامي",
+              "grams": "40"
+            },
+            {
+              "category": "ألبان وجبن",
+              "nutritionName": "بيض",
+              "grams": "100"
+            },
+            {
+              "category": "بقوليات",
+              "nutritionName": "شوفان",
+              "grams": "25"
+            },
+            {
+              "category": "فواكه",
+              "nutritionName": "موز",
+              "grams": "100"
+            }
+          ]
+        },
+        {
+          "name": "وجبة 2 السناك الساعة 10.5am",
+          "foods": [
+            {
+              "category": "نشويات",
+              "nutritionName": "عيش فينو سن",
+              "grams": "25"
+            }
+          ]
+        },
+        {
+          "name": "وجبة 3 السناك الساعة 1pm",
+          "foods": [
+            {
+              "category": "نشويات",
+              "nutritionName": "عيش فينو سن",
+              "grams": "25"
+            }
+          ]
+        },
+        {
+          "name": "وجبة 4 الغذاء الساعة 10.5am",
+          "foods": [
+            {
+              "category": "نشويات",
+              "nutritionName": "رز",
+              "grams": "100"
+            },
+            {
+              "category": "لحوم",
+              "nutritionName": "ورك",
+              "grams": "140"
+            }
+          ]
+        },
+        {
+          "name": "وجبة 5 السناك الساعة 9am",
+          "foods": [
+            {
+              "category": "لحوم",
+              "nutritionName": "تونه دايت",
+              "grams": "42.5"
+            },
+            {
+              "category": "بقوليات",
+              "nutritionName": "شوفان",
+              "grams": "25"
+            },
+            {
+              "category": "ألبان وجبن",
+              "nutritionName": "لبن خالي الدسم - كوب",
+              "grams": "100"
+            }
+          ]
+        }
+      ],
+      "inbody": {
+        "weight": {
+          "before": "84.6",
+          "after": "73"
+        },
+        "muscleMass": {
+          "before": "33.5",
+          "after": "34"
+        },
+        "bodyFat": {
+          "before": "29.6",
+          "after": "17.9"
+        },
+        "bodyFatMass": {
+          "before": "25.2",
+          "after": "13.1"
+        },
+        "water": {
+          "before": "43.6",
+          "after": "44"
+        }
+      }
+    },
+      {
+      "name": "النظام التانى",
+      "duration": "4شهور و اسبوعين من تاريخ 25/02/2026 الى 25/5/2026",
+      "mealCount": 5,
+      "meals": [
+        {
+          "name": "وجبة 1 الفطار الساعة 7.5am",
+          "foods": [
+            {
+              "category": "نشويات",
+              "nutritionName": "عيش شامي",
+              "grams": "40"
+            },
+            {
+              "category": "ألبان وجبن",
+              "nutritionName": "بيض",
+              "grams": "100"
+            },
+            {
+              "category": "بقوليات",
+              "nutritionName": "شوفان",
+              "grams": "25"
+            },
+            {
+              "category": "فواكه",
+              "nutritionName": "موز",
+              "grams": "100"
+            }
+          ]
+        },
+        {
+          "name": "وجبة 2 السناك الساعة 10.5am",
+          "foods": [
+            {
+              "category": "نشويات",
+              "nutritionName": "عيش فينو سن",
+              "grams": "25"
+            }
+          ]
+        },
+        {
+          "name": "وجبة 3 السناك الساعة 1pm",
+          "foods": [
+            {
+              "category": "نشويات",
+              "nutritionName": "عيش فينو سن",
+              "grams": "25"
+            }
+          ]
+        },
+        {
+          "name": "وجبة 4 الغذاء الساعة 10.5am",
+          "foods": [
+            {
+              "category": "نشويات",
+              "nutritionName": "رز",
+              "grams": "100"
+            },
+            {
+              "category": "لحوم",
+              "nutritionName": "ورك",
+              "grams": "140"
+            }
+          ]
+        },
+        {
+          "name": "وجبة 5 السناك الساعة 9am",
+          "foods": [
+            {
+              "category": "لحوم",
+              "nutritionName": "تونه دايت",
+              "grams": "42.5"
+            },
+            {
+              "category": "بقوليات",
+              "nutritionName": "شوفان",
+              "grams": "25"
+            },
+            {
+              "category": "ألبان وجبن",
+              "nutritionName": "لبن خالي الدسم - كوب",
+              "grams": "100"
+            }
+          ]
+        }
+      ],
+      "inbody": {
+        "weight": {
+          "before": "84.6",
+          "after": "73"
+        },
+        "muscleMass": {
+          "before": "33.5",
+          "after": "34"
+        },
+        "bodyFat": {
+          "before": "29.6",
+          "after": "17.9"
+        },
+        "bodyFatMass": {
+          "before": "25.2",
+          "after": "13.1"
+        },
+        "water": {
+          "before": "43.6",
+          "after": "44"
+        }
+      }
     }
   ]
 }
