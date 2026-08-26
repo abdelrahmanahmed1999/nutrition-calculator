@@ -66,6 +66,14 @@
             min-width: 100px;
         }
 
+        .meal-card {
+            border-right: 4px solid #198754;
+        }
+
+        .diet-summary .result-card {
+            border-top: 3px solid #198754;
+        }
+
         @media (max-width: 575.98px) {
             .container {
                 padding-left: 12px;
@@ -131,6 +139,16 @@
                     data-bs-target="#needs"
                     type="button">
                 حساب الاحتياجات
+            </button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+            <button class="nav-link"
+                    id="diet-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#diet"
+                    type="button">
+                الأنظمة الغذائية
             </button>
         </li>
 
@@ -391,6 +409,59 @@
 
         </div>
 
+        <!-- ==================== Diet Plans ==================== -->
+
+        <div class="tab-pane fade" id="diet">
+
+            <div class="card main-card p-3 p-md-4">
+
+                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                    <div>
+                        <h4 class="mb-1">النظام الغذائي</h4>
+                        <div class="text-muted">أنشئ وجباتك واحسب قيم اليوم وقارن قياسات InBody</div>
+                    </div>
+                    <button type="button" id="saveDietButton" class="btn btn-success">حفظ diet.json</button>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-12 col-md-7">
+                        <label for="dietName" class="form-label fw-bold">اسم النظام</label>
+                        <input type="text" id="dietName" class="form-control" placeholder="مثال: نظام التنشيف">
+                    </div>
+                    <div class="col-12 col-md-5">
+                        <label for="mealCount" class="form-label fw-bold">عدد الوجبات</label>
+                        <input type="number" id="mealCount" class="form-control" min="1" max="12" step="1" value="3">
+                    </div>
+                </div>
+
+                <div id="dietMeals"></div>
+
+                <h5 class="mt-4">إجمالي النظام</h5>
+                <div class="row g-3 diet-summary">
+                    <div class="col-6 col-lg-3"><div class="card result-card p-3 text-center"><div class="result-label">السعرات</div><div id="dietCaloriesTotal" class="result-number">0</div><small>سعر حراري</small></div></div>
+                    <div class="col-6 col-lg-3"><div class="card result-card p-3 text-center"><div class="result-label">البروتين</div><div id="dietProteinTotal" class="result-number">0</div><small>جرام</small></div></div>
+                    <div class="col-6 col-lg-3"><div class="card result-card p-3 text-center"><div class="result-label">الدهون</div><div id="dietFatTotal" class="result-number">0</div><small>جرام</small></div></div>
+                    <div class="col-6 col-lg-3"><div class="card result-card p-3 text-center"><div class="result-label">الكارب</div><div id="dietCarbsTotal" class="result-number">0</div><small>جرام</small></div></div>
+                </div>
+
+                <hr class="my-4">
+                <h5>قياسات InBody قبل وبعد</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered nutrition-table align-middle">
+                        <thead class="table-light"><tr><th>القياس</th><th>قبل</th><th>بعد</th><th>الفرق</th><th>التغير</th></tr></thead>
+                        <tbody>
+                            <tr data-measurement="weight"><th>الوزن (كجم)</th><td><input id="inbodyBeforeWeight" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td><input id="inbodyAfterWeight" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td id="inbodyDiffWeight">-</td><td id="inbodyStatusWeight">-</td></tr>
+                            <tr data-measurement="muscleMass"><th>الكتلة العضلية الهيكلية SMM (كجم)</th><td><input id="inbodyBeforeMuscle" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td><input id="inbodyAfterMuscle" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td id="inbodyDiffMuscle">-</td><td id="inbodyStatusMuscle">-</td></tr>
+                            <tr data-measurement="bodyFat"><th>نسبة الدهون PBF (%)</th><td><input id="inbodyBeforeFat" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td><input id="inbodyAfterFat" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td id="inbodyDiffFat">-</td><td id="inbodyStatusFat">-</td></tr>
+                            <tr data-measurement="water"><th>إجمالي ماء الجسم (كجم)</th><td><input id="inbodyBeforeWater" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td><input id="inbodyAfterWater" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td id="inbodyDiffWater">-</td><td id="inbodyStatusWater">-</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
         <!-- ==================== All Foods ==================== -->
 
         <div class="tab-pane fade" id="nutritions">
@@ -465,6 +536,24 @@ const needsActivityCalories = {
     '1.35': document.getElementById('needsActivityCalories135'),
     '1.45': document.getElementById('needsActivityCalories145'),
     '1.55': document.getElementById('needsActivityCalories155')
+};
+
+const dietName = document.getElementById('dietName');
+const mealCount = document.getElementById('mealCount');
+const dietMeals = document.getElementById('dietMeals');
+const saveDietButton = document.getElementById('saveDietButton');
+const dietTotals = {
+    calories: document.getElementById('dietCaloriesTotal'),
+    protein: document.getElementById('dietProteinTotal'),
+    fat: document.getElementById('dietFatTotal'),
+    carbs: document.getElementById('dietCarbsTotal')
+};
+
+const inbodyFields = {
+    weight: ['inbodyBeforeWeight', 'inbodyAfterWeight', 'inbodyDiffWeight', 'inbodyStatusWeight'],
+    muscleMass: ['inbodyBeforeMuscle', 'inbodyAfterMuscle', 'inbodyDiffMuscle', 'inbodyStatusMuscle'],
+    bodyFat: ['inbodyBeforeFat', 'inbodyAfterFat', 'inbodyDiffFat', 'inbodyStatusFat'],
+    water: ['inbodyBeforeWater', 'inbodyAfterWater', 'inbodyDiffWater', 'inbodyStatusWater']
 };
 
 const dailyTotals = {
@@ -578,6 +667,185 @@ function escapeHtml(value) {
         .replaceAll('"', '&quot;')
         .replaceAll("'", '&#039;');
 }
+
+function emptyDietMeal(name = '') {
+    return { name, foods: [{ category: '', nutritionName: '', grams: '' }] };
+}
+
+function foodOptions(selectedCategory = '') {
+    return `<option value="">-- اختر القسم --</option>${Object.keys(nutritionsData).map(category =>
+        `<option value="${escapeHtml(category)}" ${category === selectedCategory ? 'selected' : ''}>${escapeHtml(category)}</option>`
+    ).join('')}`;
+}
+
+function nutritionOptions(category, selectedName = '') {
+    const foods = nutritionsData[category] || [];
+    return `<option value="">-- اختر الوجبة --</option>${foods.map(food =>
+        `<option value="${escapeHtml(food.name)}" ${food.name === selectedName ? 'selected' : ''}>${escapeHtml(food.name)}</option>`
+    ).join('')}`;
+}
+
+function renderDietMeals(savedMeals = []) {
+    const count = Math.min(12, Math.max(1, Number(mealCount.value) || 1));
+    mealCount.value = count;
+    dietMeals.innerHTML = '';
+
+    for (let mealIndex = 0; mealIndex < count; mealIndex++) {
+        const meal = savedMeals[mealIndex] || emptyDietMeal(`وجبة ${mealIndex + 1}`);
+        const card = document.createElement('div');
+        card.className = 'card meal-card mb-3 p-3';
+        card.dataset.mealIndex = mealIndex;
+        card.innerHTML = `
+            <div class="row g-2 align-items-end mb-3">
+                <div class="col-12 col-md-8"><label class="form-label fw-bold">اسم الوجبة</label><input class="form-control meal-name" value="${escapeHtml(meal.name)}" placeholder="مثال: الفطار"></div>
+                <div class="col-12 col-md-4"><button type="button" class="btn btn-outline-success w-100 add-diet-food">إضافة صنف للوجبة</button></div>
+            </div>
+            <div class="table-responsive"><table class="table table-bordered nutrition-table mb-0"><thead class="table-light"><tr><th>القسم</th><th>الطعام</th><th>الجرام</th><th>السعرات</th><th>البروتين</th><th>الدهون</th><th>الكارب</th><th></th></tr></thead><tbody></tbody></table></div>
+            <div class="text-end text-muted mt-2">إجمالي الوجبة: <span class="meal-total">0 سعر</span></div>`;
+        const tbody = card.querySelector('tbody');
+        (meal.foods && meal.foods.length ? meal.foods : emptyDietMeal().foods).forEach(food => {
+            tbody.appendChild(createDietFoodRow(food));
+        });
+        dietMeals.appendChild(card);
+    }
+    updateDietTotals();
+}
+
+function createDietFoodRow(food = {}) {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td><select class="form-select diet-category">${foodOptions(food.category)}</select></td>
+        <td><select class="form-select diet-nutrition" ${food.category ? '' : 'disabled'}>${nutritionOptions(food.category, food.nutritionName)}</select></td>
+        <td><input class="form-control diet-grams" type="number" min="0" step="0.1" value="${escapeHtml(food.grams)}" ${food.nutritionName ? '' : 'disabled'} placeholder="جرام"></td>
+        <td class="diet-calories">-</td><td class="diet-protein">-</td><td class="diet-fat">-</td><td class="diet-carbs">-</td>
+        <td><button type="button" class="btn btn-sm btn-outline-danger remove-diet-food">حذف</button></td>`;
+    updateDietFoodRow(row);
+    return row;
+}
+
+function updateDietFoodRow(row) {
+    const category = row.querySelector('.diet-category').value;
+    const nutritionSelect = row.querySelector('.diet-nutrition');
+    const gramsInput = row.querySelector('.diet-grams');
+    const nutrition = nutritionsData[category]?.find(food => food.name === nutritionSelect.value);
+    const grams = Number(gramsInput.value);
+    nutritionSelect.innerHTML = nutritionOptions(category, nutritionSelect.value);
+    nutritionSelect.disabled = !category;
+    gramsInput.disabled = !nutrition;
+    const values = {};
+    ['calories', 'protein', 'fat', 'carbs'].forEach(key => {
+        values[key] = nutrition && grams > 0 && nutrition[key] !== null && nutrition[key] !== undefined
+            ? nutrition[key] * grams / 100 : null;
+        row.querySelector(`.diet-${key}`).innerHTML = values[key] === null ? '-' : formatNumber(values[key]);
+    });
+    return values;
+}
+
+function updateDietTotals() {
+    const totals = { calories: 0, protein: 0, fat: 0, carbs: 0 };
+    dietMeals.querySelectorAll('.meal-card').forEach(card => {
+        const mealTotals = { calories: 0, protein: 0, fat: 0, carbs: 0 };
+        card.querySelectorAll('tbody tr').forEach(row => {
+            const values = updateDietFoodRow(row);
+            Object.keys(totals).forEach(key => {
+                if (values[key] !== null) {
+                    totals[key] += values[key];
+                    mealTotals[key] += values[key];
+                }
+            });
+        });
+        card.querySelector('.meal-total').textContent = `${formatNumber(mealTotals.calories)} سعر | ${formatNumber(mealTotals.protein)} جم بروتين`;
+    });
+    Object.keys(dietTotals).forEach(key => {
+        dietTotals[key].textContent = formatNumber(totals[key]);
+    });
+}
+
+function updateInbody() {
+    Object.entries(inbodyFields).forEach(([key, ids]) => {
+        const before = Number(document.getElementById(ids[0]).value);
+        const after = Number(document.getElementById(ids[1]).value);
+        const diff = before > 0 && after > 0 ? after - before : null;
+        document.getElementById(ids[2]).textContent = diff === null ? '-' : `${diff > 0 ? '+' : ''}${formatNumber(diff)}`;
+        const status = document.getElementById(ids[3]);
+        if (diff === null || diff === 0) status.textContent = diff === 0 ? 'بدون تغيير' : '-';
+        else if (key === 'bodyFat' || key === 'weight') status.textContent = diff < 0 ? 'تحسن' : 'زيادة';
+        else status.textContent = diff > 0 ? 'تحسن' : 'انخفاض';
+    });
+}
+
+function collectDietData() {
+    return {
+        name: dietName.value.trim(),
+        mealCount: Number(mealCount.value),
+        meals: [...dietMeals.querySelectorAll('.meal-card')].map(card => ({
+            name: card.querySelector('.meal-name').value.trim(),
+            foods: [...card.querySelectorAll('tbody tr')].map(row => ({
+                category: row.querySelector('.diet-category').value,
+                nutritionName: row.querySelector('.diet-nutrition').value,
+                grams: row.querySelector('.diet-grams').value
+            }))
+        })),
+        inbody: Object.fromEntries(Object.entries(inbodyFields).map(([key, ids]) => [key, {
+            before: document.getElementById(ids[0]).value,
+            after: document.getElementById(ids[1]).value
+        }]))
+    };
+}
+
+function applyDietData(data) {
+    if (!data || typeof data !== 'object') return;
+    dietName.value = data.name || '';
+    mealCount.value = data.mealCount || data.meals?.length || 3;
+    renderDietMeals(Array.isArray(data.meals) ? data.meals : []);
+    Object.entries(inbodyFields).forEach(([key, ids]) => {
+        const values = data.inbody?.[key] || {};
+        document.getElementById(ids[0]).value = values.before || '';
+        document.getElementById(ids[1]).value = values.after || '';
+    });
+    updateInbody();
+}
+
+function downloadDietJson() {
+    const json = JSON.stringify(collectDietData(), null, 2);
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
+    link.download = 'diet.json';
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+    alert('تم تنزيل diet.json. ارفع الملف الجديد بجانب الصفحة لحفظ النظام.');
+}
+
+mealCount.addEventListener('change', () => renderDietMeals());
+dietMeals.addEventListener('input', event => {
+    if (event.target.matches('.meal-name, .diet-grams')) updateDietTotals();
+});
+dietMeals.addEventListener('change', event => {
+    const row = event.target.closest('tr');
+    if (!row) return;
+    if (event.target.classList.contains('diet-category')) {
+        row.querySelector('.diet-nutrition').value = '';
+        row.querySelector('.diet-grams').value = '';
+    }
+    updateDietFoodRow(row);
+    updateDietTotals();
+});
+dietMeals.addEventListener('click', event => {
+    if (event.target.classList.contains('add-diet-food')) {
+        event.target.closest('.meal-card').querySelector('tbody').appendChild(createDietFoodRow());
+        updateDietTotals();
+    }
+    if (event.target.classList.contains('remove-diet-food')) {
+        const tbody = event.target.closest('tbody');
+        if (tbody.rows.length > 1) event.target.closest('tr').remove();
+        updateDietTotals();
+    }
+});
+document.querySelectorAll('.inbody-input').forEach(input => input.addEventListener('input', updateInbody));
+saveDietButton.addEventListener('click', downloadDietJson);
 
 function readFoodRow(row) {
 
@@ -1252,8 +1520,24 @@ fetch('nutrition.json')
 
         loadCategories();
         renderDailyRows();
+        renderDietMeals();
 
         renderNutritionsTable();
+
+        return fetch('diet.json');
+
+    })
+
+    .then(response => {
+
+        if (!response || !response.ok) return null;
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        if (data) applyDietData(data);
 
     })
 
