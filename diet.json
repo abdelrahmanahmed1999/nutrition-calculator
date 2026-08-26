@@ -101,6 +101,10 @@
       "before": "18.9",
       "after": "13.4"
     },
+    "bodyFatMass": {
+      "before": "",
+      "after": ""
+    },
     "water": {
       "before": "42.4",
       "after": "43.6"

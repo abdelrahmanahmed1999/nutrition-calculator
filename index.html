@@ -454,6 +454,7 @@
                             <tr data-measurement="water"><th>إجمالي ماء الجسم (كجم) (total body water)</th><td><input id="inbodyBeforeWater" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td><input id="inbodyAfterWater" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td id="inbodyDiffWater">-</td><td id="inbodyStatusWater">-</td></tr>
                             <tr data-measurement="muscleMass"><th>الكتلة العضلية الهيكلية SMM (كجم)(skeletal muscle mass)</th><td><input id="inbodyBeforeMuscle" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td><input id="inbodyAfterMuscle" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td id="inbodyDiffMuscle">-</td><td id="inbodyStatusMuscle">-</td></tr>
                             <tr data-measurement="bodyFat"><th>نسبة الدهون PBF (%)(percent body fat)</th><td><input id="inbodyBeforeFat" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td><input id="inbodyAfterFat" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td id="inbodyDiffFat">-</td><td id="inbodyStatusFat">-</td></tr>
+                            <tr data-measurement="bodyFatMass"><th>كتلة الدهون في الجسم (كجم) (body fat mass)</th><td><input id="inbodyBeforeFatMass" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td><input id="inbodyAfterFatMass" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td id="inbodyDiffFatMass">-</td><td id="inbodyStatusFatMass">-</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -553,6 +554,7 @@ const inbodyFields = {
     weight: ['inbodyBeforeWeight', 'inbodyAfterWeight', 'inbodyDiffWeight', 'inbodyStatusWeight'],
     muscleMass: ['inbodyBeforeMuscle', 'inbodyAfterMuscle', 'inbodyDiffMuscle', 'inbodyStatusMuscle'],
     bodyFat: ['inbodyBeforeFat', 'inbodyAfterFat', 'inbodyDiffFat', 'inbodyStatusFat'],
+    bodyFatMass: ['inbodyBeforeFatMass', 'inbodyAfterFatMass', 'inbodyDiffFatMass', 'inbodyStatusFatMass'],
     water: ['inbodyBeforeWater', 'inbodyAfterWater', 'inbodyDiffWater', 'inbodyStatusWater']
 };
 
@@ -769,7 +771,7 @@ function updateInbody() {
         document.getElementById(ids[2]).textContent = diff === null ? '-' : `${diff > 0 ? '+' : ''}${formatNumber(diff)}`;
         const status = document.getElementById(ids[3]);
         if (diff === null || diff === 0) status.textContent = diff === 0 ? 'بدون تغيير' : '-';
-        else if (key === 'bodyFat' || key === 'weight') status.textContent = diff < 0 ? 'تحسن' : 'زيادة';
+        else if (key === 'bodyFat' || key === 'bodyFatMass' || key === 'weight') status.textContent = diff < 0 ? 'تحسن' : 'زيادة';
         else status.textContent = diff > 0 ? 'تحسن' : 'انخفاض';
     });
 }
