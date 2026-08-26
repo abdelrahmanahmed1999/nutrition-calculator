@@ -74,6 +74,57 @@
             border-top: 3px solid #198754;
         }
 
+        #dietPlanTabs {
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+            margin-bottom: 0 !important;
+            border: 0;
+        }
+
+        #dietPlanTabs .nav-link {
+            width: 100%;
+            text-align: right;
+            border-radius: 0;
+            border: 1px solid #b6d4fe;
+            background: #cfe2ff;
+            color: #084298;
+            margin-bottom: 0.5rem;
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #dietPlanTabs .nav-link.active {
+            background: #0d6efd;
+            border-color: #0d6efd;
+            color: #fff;
+        }
+
+        .diet-plan-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.5rem;
+        }
+
+        .diet-plan-body {
+            flex: 1;
+            min-width: 0;
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            padding: 1rem;
+            background: #fff;
+        }
+
+        @media (max-width: 767.98px) {
+            #dietPlanTabs {
+                width: 100%;
+            }
+        }
+
         @media (max-width: 575.98px) {
             .container {
                 padding-left: 12px;
@@ -420,9 +471,16 @@
                         <h4 class="mb-1">النظام الغذائي</h4>
                         <div class="text-muted">أنشئ وجباتك واحسب قيم اليوم وقارن قياسات InBody</div>
                     </div>
-                    <button type="button" id="saveDietButton" class="btn btn-success">حفظ diet.json</button>
+                    <div class="d-flex gap-2">
+                        <button type="button" id="addDietPlanButton" class="btn btn-primary">نظام جديد</button>
+                        <button type="button" id="saveDietButton" class="btn btn-success">حفظ diet.json</button>
+                    </div>
                 </div>
 
+                <div class="diet-plan-layout">
+                    <div id="dietPlanTabs" class="nav nav-tabs" role="tablist" aria-label="الأنظمة الغذائية"></div>
+
+                    <div id="diet-panel" class="diet-plan-body" role="tabpanel" aria-live="polite">
                 <div class="row g-3 mb-4">
                     <div class="col-12 col-md-7">
                         <label for="dietName" class="form-label fw-bold">اسم النظام</label>
@@ -457,6 +515,9 @@
                             <tr data-measurement="bodyFatMass"><th>كتلة الدهون في الجسم (كجم) (body fat mass)</th><td><input id="inbodyBeforeFatMass" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td><input id="inbodyAfterFatMass" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td id="inbodyDiffFatMass">-</td><td id="inbodyStatusFatMass">-</td></tr>
                         </tbody>
                     </table>
+                </div>
+
+                    </div>
                 </div>
 
             </div>
@@ -542,7 +603,12 @@ const needsActivityCalories = {
 const dietName = document.getElementById('dietName');
 const mealCount = document.getElementById('mealCount');
 const dietMeals = document.getElementById('dietMeals');
+const dietPlanTabs = document.getElementById('dietPlanTabs');
+const addDietPlanButton = document.getElementById('addDietPlanButton');
 const saveDietButton = document.getElementById('saveDietButton');
+let dietPlans = [];
+let activeDietIndex = 0;
+let dietPanelOpen = false;
 const dietTotals = {
     calories: document.getElementById('dietCaloriesTotal'),
     protein: document.getElementById('dietProteinTotal'),
@@ -672,6 +738,15 @@ function escapeHtml(value) {
 
 function emptyDietMeal(name = '') {
     return { name, foods: [{ category: '', nutritionName: '', grams: '' }] };
+}
+
+function emptyDietPlan(name = 'نظام جديد') {
+    return {
+        name,
+        mealCount: 3,
+        meals: [emptyDietMeal('الفطار'), emptyDietMeal('الغداء'), emptyDietMeal('العشاء')],
+        inbody: {}
+    };
 }
 
 function foodOptions(selectedCategory = '') {
@@ -808,8 +883,63 @@ function applyDietData(data) {
     updateInbody();
 }
 
+function renderDietPlanTabs() {
+    dietPlanTabs.innerHTML = '';
+    dietPlans.forEach((plan, index) => {
+        const tab = document.createElement('div');
+            tab.className = `nav-link ${index === activeDietIndex && dietPanelOpen ? 'active' : ''}`;
+        tab.dataset.dietIndex = index;
+            tab.id = `diet-tab-${index}`;
+            tab.setAttribute('role', 'tab');
+            tab.setAttribute('aria-selected', index === activeDietIndex && dietPanelOpen ? 'true' : 'false');
+            tab.setAttribute('aria-controls', 'diet-panel');
+            tab.setAttribute('tabindex', '0');
+            tab.innerHTML = `<span>${escapeHtml(plan.name || `نظام ${index + 1}`)}</span><span class="d-flex align-items-center gap-3"><button type="button" class="btn btn-sm btn-outline-danger delete-diet-plan" data-diet-index="${index}" aria-label="حذف النظام">حذف</button><span aria-hidden="true">${index === activeDietIndex && dietPanelOpen ? '-' : '+'}</span></span>`;
+        dietPlanTabs.appendChild(tab);
+    });
+        const dietPanel = document.getElementById('diet-panel');
+        dietPanel.hidden = !dietPanelOpen;
+        if (dietPanelOpen) {
+        dietPanel.setAttribute('aria-labelledby', `diet-tab-${activeDietIndex}`);
+        }
+}
+
+function saveActiveDietPlan() {
+    if (dietPlans[activeDietIndex]) {
+        dietPlans[activeDietIndex] = collectDietData();
+    }
+}
+
+function switchDietPlan(index) {
+    if (!dietPlans[index]) return;
+
+    if (index === activeDietIndex && dietPanelOpen) {
+        saveActiveDietPlan();
+        dietPanelOpen = false;
+        renderDietPlanTabs();
+        return;
+    }
+
+    saveActiveDietPlan();
+    activeDietIndex = index;
+    applyDietData(dietPlans[activeDietIndex]);
+    dietPanelOpen = true;
+    renderDietPlanTabs();
+}
+
+function addDietPlan() {
+    saveActiveDietPlan();
+    dietPlans.push(emptyDietPlan(`نظام ${dietPlans.length + 1}`));
+    activeDietIndex = dietPlans.length - 1;
+    applyDietData(dietPlans[activeDietIndex]);
+    dietPanelOpen = true;
+    renderDietPlanTabs();
+    dietName.focus();
+}
+
 function downloadDietJson() {
-    const json = JSON.stringify(collectDietData(), null, 2);
+    saveActiveDietPlan();
+    const json = JSON.stringify({ plans: dietPlans }, null, 2);
     const link = document.createElement('a');
     link.href = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
     link.download = 'diet.json';
@@ -822,6 +952,39 @@ function downloadDietJson() {
 }
 
 mealCount.addEventListener('change', () => renderDietMeals());
+dietName.addEventListener('input', () => {
+    if (dietPlans[activeDietIndex]) {
+        dietPlans[activeDietIndex].name = dietName.value.trim();
+        renderDietPlanTabs();
+    }
+});
+dietPlanTabs.addEventListener('click', event => {
+    const deleteButton = event.target.closest('.delete-diet-plan');
+    if (deleteButton) {
+        const index = Number(deleteButton.dataset.dietIndex);
+        if (!confirm('هل تريد حذف هذا النظام الغذائي؟')) return;
+        saveActiveDietPlan();
+        const wasOpen = dietPanelOpen;
+        dietPlans.splice(index, 1);
+        if (index < activeDietIndex) activeDietIndex -= 1;
+        else if (index === activeDietIndex) activeDietIndex = Math.min(activeDietIndex, dietPlans.length - 1);
+        if (dietPlans.length) {
+            applyDietData(dietPlans[activeDietIndex]);
+            dietPanelOpen = wasOpen;
+        } else {
+            activeDietIndex = 0;
+            dietPanelOpen = false;
+            dietName.value = '';
+            mealCount.value = 3;
+            renderDietMeals();
+        }
+        renderDietPlanTabs();
+        return;
+    }
+    const tab = event.target.closest('[data-diet-index]');
+    if (tab) switchDietPlan(Number(tab.dataset.dietIndex));
+});
+addDietPlanButton.addEventListener('click', addDietPlan);
 dietMeals.addEventListener('input', event => {
     if (event.target.matches('.meal-name, .diet-grams')) updateDietTotals();
 });
@@ -1539,7 +1702,14 @@ fetch('nutrition.json')
 
     .then(data => {
 
-        if (data) applyDietData(data);
+        if (data) {
+            dietPlans = Array.isArray(data.plans) && data.plans.length
+                ? data.plans
+                : [data];
+            activeDietIndex = 0;
+            applyDietData(dietPlans[activeDietIndex]);
+            renderDietPlanTabs();
+        }
 
     })
 

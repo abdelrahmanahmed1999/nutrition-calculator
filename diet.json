@@ -1,113 +1,117 @@
 {
-  "name": "النظام التالت [دا بيستهدف الدهون جامد و بيحافظ او بيزود العضلات شوية] مع 3 ايام جيم",
-  "mealCount": 5,
-  "meals": [
+  "plans": [
     {
-      "name": "وجبة 1 الفطار الساعة 7.5am",
-      "foods": [
+      "name": "النظام التالت [دا بيستهدف الدهون جامد و بيحافظ او بيزود العضلات شوية] مع 3 ايام جيم",
+      "mealCount": 5,
+      "meals": [
         {
-          "category": "نشويات",
-          "nutritionName": "عيش بلدي",
-          "grams": "35"
+          "name": "وجبة 1 الفطار الساعة 7.5am",
+          "foods": [
+            {
+              "category": "نشويات",
+              "nutritionName": "عيش بلدي",
+              "grams": "35"
+            },
+            {
+              "category": "ألبان وجبن",
+              "nutritionName": "بيض",
+              "grams": "150"
+            },
+            {
+              "category": "ألبان وجبن",
+              "nutritionName": "جبنة قريش",
+              "grams": "75"
+            },
+            {
+              "category": "ألبان وجبن",
+              "nutritionName": "لبن خالي الدسم - كوب",
+              "grams": "100"
+            },
+            {
+              "category": "فواكه",
+              "nutritionName": "موز",
+              "grams": "100"
+            }
+          ]
         },
         {
-          "category": "ألبان وجبن",
-          "nutritionName": "بيض",
-          "grams": "150"
+          "name": "وجبة 2 السناك الساعة 12.5pm",
+          "foods": [
+            {
+              "category": "نشويات",
+              "nutritionName": "عيش فينو سن",
+              "grams": "50"
+            },
+            {
+              "category": "لحوم",
+              "nutritionName": "تونه دايت",
+              "grams": "84.6"
+            }
+          ]
         },
         {
-          "category": "ألبان وجبن",
-          "nutritionName": "جبنة قريش",
-          "grams": "75"
+          "name": "وجبة 3 السناك الساعة 4pm",
+          "foods": [
+            {
+              "category": "نشويات",
+              "nutritionName": "عيش بلدي",
+              "grams": "17"
+            },
+            {
+              "category": "لحوم",
+              "nutritionName": "صدور",
+              "grams": "50"
+            }
+          ]
         },
         {
-          "category": "ألبان وجبن",
-          "nutritionName": "لبن خالي الدسم - كوب",
-          "grams": "100"
+          "name": "وجبة 4  الغذاء الساعة (6 8or ) pm",
+          "foods": [
+            {
+              "category": "نشويات",
+              "nutritionName": "رز",
+              "grams": "200"
+            },
+            {
+              "category": "لحوم",
+              "nutritionName": "ورك",
+              "grams": "140"
+            }
+          ]
         },
         {
-          "category": "فواكه",
-          "nutritionName": "موز",
-          "grams": "100"
+          "name": "وجبة العشاء 3 الساعة (9  10or )pm",
+          "foods": [
+            {
+              "category": "ألبان وجبن",
+              "nutritionName": "زبادى يونانى دانون",
+              "grams": "100"
+            }
+          ]
         }
-      ]
-    },
-    {
-      "name": "وجبة 2 السناك الساعة 12.5pm",
-      "foods": [
-        {
-          "category": "نشويات",
-          "nutritionName": "عيش فينو سن",
-          "grams": "50"
+      ],
+      "inbody": {
+        "weight": {
+          "before": "71.1",
+          "after": "68.5"
         },
-        {
-          "category": "لحوم",
-          "nutritionName": "تونه دايت",
-          "grams": "84.6"
-        }
-      ]
-    },
-    {
-      "name": "وجبة 3 السناك الساعة 4pm",
-      "foods": [
-        {
-          "category": "نشويات",
-          "nutritionName": "عيش بلدي",
-          "grams": "17"
+        "muscleMass": {
+          "before": "32.4",
+          "after": "33.6"
         },
-        {
-          "category": "لحوم",
-          "nutritionName": "صدور",
-          "grams": "50"
-        }
-      ]
-    },
-    {
-      "name": "وجبة 4  الغذاء الساعة (6 8or ) pm",
-      "foods": [
-        {
-          "category": "نشويات",
-          "nutritionName": "رز",
-          "grams": "200"
+        "bodyFat": {
+          "before": "18.9",
+          "after": "13.4"
         },
-        {
-          "category": "لحوم",
-          "nutritionName": "ورك",
-          "grams": "140"
+        "bodyFatMass": {
+          "before": "13.4",
+          "after": "9.2"
+        },
+        "water": {
+          "before": "42.4",
+          "after": "43.6"
         }
-      ]
-    },
-    {
-      "name": "وجبة العشاء 3 الساعة (9  10or )pm",
-      "foods": [
-        {
-          "category": "ألبان وجبن",
-          "nutritionName": "زبادى يونانى دانون",
-          "grams": "100"
-        }
-      ]
+      }
     }
-  ],
-  "inbody": {
-    "weight": {
-      "before": "71.1",
-      "after": "68.5"
-    },
-    "muscleMass": {
-      "before": "32.4",
-      "after": "33.6"
-    },
-    "bodyFat": {
-      "before": "18.9",
-      "after": "13.4"
-    },
-    "bodyFatMass": {
-      "before": "",
-      "after": ""
-    },
-    "water": {
-      "before": "42.4",
-      "after": "43.6"
-    }
-  }
+  ]
 }
