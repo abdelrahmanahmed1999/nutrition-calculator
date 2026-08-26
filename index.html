@@ -482,11 +482,15 @@
 
                     <div id="diet-panel" class="diet-plan-body" role="tabpanel" aria-live="polite">
                 <div class="row g-3 mb-4">
-                    <div class="col-12 col-md-7">
+                    <div class="col-12 col-md-5">
                         <label for="dietName" class="form-label fw-bold">اسم النظام</label>
                         <input type="text" id="dietName" class="form-control" placeholder="مثال: نظام التنشيف">
                     </div>
-                    <div class="col-12 col-md-5">
+                    <div class="col-12 col-md-4">
+                        <label for="dietDuration" class="form-label fw-bold">مدة النظام</label>
+                        <input type="text" id="dietDuration" class="form-control" placeholder="مثال: 30 يوم أو 8 أسابيع">
+                    </div>
+                    <div class="col-12 col-md-3">
                         <label for="mealCount" class="form-label fw-bold">عدد الوجبات</label>
                         <input type="number" id="mealCount" class="form-control" min="1" max="12" step="1" value="3">
                     </div>
@@ -601,6 +605,7 @@ const needsActivityCalories = {
 };
 
 const dietName = document.getElementById('dietName');
+const dietDuration = document.getElementById('dietDuration');
 const mealCount = document.getElementById('mealCount');
 const dietMeals = document.getElementById('dietMeals');
 const dietPlanTabs = document.getElementById('dietPlanTabs');
@@ -743,6 +748,7 @@ function emptyDietMeal(name = '') {
 function emptyDietPlan(name = 'نظام جديد') {
     return {
         name,
+        duration: '',
         mealCount: 3,
         meals: [emptyDietMeal('الفطار'), emptyDietMeal('الغداء'), emptyDietMeal('العشاء')],
         inbody: {}
@@ -854,6 +860,7 @@ function updateInbody() {
 function collectDietData() {
     return {
         name: dietName.value.trim(),
+        duration: dietDuration.value.trim(),
         mealCount: Number(mealCount.value),
         meals: [...dietMeals.querySelectorAll('.meal-card')].map(card => ({
             name: card.querySelector('.meal-name').value.trim(),
@@ -873,6 +880,7 @@ function collectDietData() {
 function applyDietData(data) {
     if (!data || typeof data !== 'object') return;
     dietName.value = data.name || '';
+    dietDuration.value = data.duration || '';
     mealCount.value = data.mealCount || data.meals?.length || 3;
     renderDietMeals(Array.isArray(data.meals) ? data.meals : []);
     Object.entries(inbodyFields).forEach(([key, ids]) => {
@@ -956,6 +964,11 @@ dietName.addEventListener('input', () => {
     if (dietPlans[activeDietIndex]) {
         dietPlans[activeDietIndex].name = dietName.value.trim();
         renderDietPlanTabs();
+    }
+});
+dietDuration.addEventListener('input', () => {
+    if (dietPlans[activeDietIndex]) {
+        dietPlans[activeDietIndex].duration = dietDuration.value.trim();
     }
 });
 dietPlanTabs.addEventListener('click', event => {
