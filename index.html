@@ -463,14 +463,14 @@
                         <div class="card result-card p-3 text-center">
                             <div class="result-label">BMR</div>
                             <div id="needsBmr" class="result-number">0</div>
-                            <small>سعر حراري</small>
+                            <small>سعره حراري</small>
                         </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-3">
                         <div class="card result-card p-3 text-center">
                             <div class="result-label">السعرات حسب النشاط</div>
                             <div id="needsCalories" class="result-number">0</div>
-                            <small>سعر حراري يوميًا</small>
+                            <small>سعره حراري يوميًا</small>
                         </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-3">
@@ -570,55 +570,6 @@
                     </div>
                 </div>
 
-                <div class="row g-3 mb-4">
-                    <div class="col-12 col-md-3">
-                        <label for="dietPlanWeight" class="form-label fw-bold">الوزن بالكجم</label>
-                        <input type="number" id="dietPlanWeight" class="form-control" min="1" step="0.1" placeholder="مثال: 72">
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <label for="dietPlanHeight" class="form-label fw-bold">الطول بالسم</label>
-                        <input type="number" id="dietPlanHeight" class="form-control" min="1" step="0.1" placeholder="مثال: 175">
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <label for="dietPlanAge" class="form-label fw-bold">العمر</label>
-                        <input type="number" id="dietPlanAge" class="form-control" min="1" step="1" placeholder="مثال: 27">
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <label for="dietPlanActivity" class="form-label fw-bold">مستوى النشاط</label>
-                        <select id="dietPlanActivity" class="form-select">
-                            <option value="1.2">قليل جدًا</option>
-                            <option value="1.35">خفيف</option>
-                            <option value="1.45">متوسط</option>
-                            <option value="1.55">جيد</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row g-3 mb-4 align-items-end">
-                    <div class="col-12 col-md-3">
-                        <label class="form-label fw-bold">العجز في اليوم</label>
-                        <input type="text" id="dietDailyCalorieGap" class="form-control" disabled>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <label class="form-label fw-bold">العجز خلال 30 يوم</label>
-                        <input type="text" id="dietMonthlyCalorieGap" class="form-control" disabled>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <label class="form-label fw-bold">المستهدف في اليوم</label>
-                        <input type="text" id="dietDailyGoalKg" class="form-control" disabled>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <label class="form-label fw-bold">المستهدف خلال 30 يوم</label>
-                        <input type="text" id="dietMonthlyGoalKg" class="form-control" disabled>
-                    </div>
-                </div>
-
-                <div class="row g-3 mb-4 align-items-end">
-                    <div class="col-12 col-md-12">
-                        <button type="button" id="calculateDietExpectationButton" class="btn btn-outline-primary w-100">احسب المتوقع من النظام دا</button>
-                    </div>
-                </div>
-
                 <div id="dietMeals"></div>
 
                 <h5 class="mt-4">إجمالي النظام</h5>
@@ -642,6 +593,51 @@
                             <tr data-measurement="bodyFatMass"><th>كتلة الدهون في الجسم (كجم) (body fat mass)</th><td><input id="inbodyBeforeFatMass" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td><input id="inbodyAfterFatMass" class="form-control inbody-input" type="number" min="0" step="0.1"></td><td id="inbodyDiffFatMass">-</td><td id="inbodyStatusFatMass">-</td></tr>
                         </tbody>
                     </table>
+                </div>
+
+                <div class="row g-3 mt-4">
+                    <div class="col-12 col-md-4">
+                        <label for="dietPlanHeight" class="form-label fw-bold">الطول بالسم</label>
+                        <input type="number" id="dietPlanHeight" class="form-control" min="1" step="0.1" placeholder="مثال: 175">
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="dietPlanAge" class="form-label fw-bold">العمر</label>
+                        <input type="number" id="dietPlanAge" class="form-control" min="1" step="1" placeholder="مثال: 27">
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="dietPlanActivity" class="form-label fw-bold">مستوى النشاط</label>
+                        <select id="dietPlanActivity" class="form-select">
+                            <option value="1.2">قليل جدًا</option>
+                            <option value="1.35">خفيف</option>
+                            <option value="1.45">متوسط</option>
+                            <option value="1.55">جيد</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-4 mt-2 align-items-end">
+                    <div class="col-12 col-md-3">
+                        <label class="form-label fw-bold">العجز في اليوم[Caloric Deficit]</label>
+                        <input type="text" id="dietDailyCalorieGap" class="form-control" disabled>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <label class="form-label fw-bold">العجز خلال 30 يوم[Caloric Deficit]</label>
+                        <input type="text" id="dietMonthlyCalorieGap" class="form-control" disabled>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <label class="form-label fw-bold">المستهدف في اليوم</label>
+                        <input type="text" id="dietDailyGoalKg" class="form-control" disabled>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <label class="form-label fw-bold">المستهدف خلال 30 يوم</label>
+                        <input type="text" id="dietMonthlyGoalKg" class="form-control" disabled>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-4 align-items-end">
+                    <div class="col-12 col-md-12">
+                        <button type="button" id="calculateDietExpectationButton" class="btn btn-outline-primary w-100">احسب المتوقع من النظام دا</button>
+                    </div>
                 </div>
 
                     </div>
@@ -730,7 +726,6 @@ const needsActivityCalories = {
 const dietName = document.getElementById('dietName');
 const dietDuration = document.getElementById('dietDuration');
 const mealCount = document.getElementById('mealCount');
-const dietPlanWeight = document.getElementById('dietPlanWeight');
 const dietPlanHeight = document.getElementById('dietPlanHeight');
 const dietPlanAge = document.getElementById('dietPlanAge');
 const dietPlanActivity = document.getElementById('dietPlanActivity');
@@ -1048,7 +1043,6 @@ function emptyDietPlan(name = 'نظام جديد') {
         duration: '',
         mealCount: 3,
         user: {
-            weight: '',
             height: '',
             age: '',
             activity: '1.35'
@@ -1140,7 +1134,7 @@ function updateDietTotals() {
                 }
             });
         });
-        card.querySelector('.meal-total').textContent = `${formatNumber(mealTotals.calories)} سعر | ${formatNumber(mealTotals.protein)} جم بروتين`;
+        card.querySelector('.meal-total').textContent = `${formatNumber(mealTotals.calories)} سعره | ${formatNumber(mealTotals.protein)} جم بروتين`;
     });
     Object.keys(dietTotals).forEach(key => {
         dietTotals[key].textContent = formatNumber(totals[key]);
@@ -1150,7 +1144,7 @@ function updateDietTotals() {
 function calculateDietExpectation() {
     const totalCalories = Number(String(dietTotals.calories.textContent).replace(/,/g, '')) || 0;
 
-    const weight = Number(dietPlanWeight.value) || Number(needsWeight.value) || 0;
+    const weight = Number(document.getElementById('inbodyBeforeWeight').value) || Number(needsWeight.value) || 0;
     const height = Number(dietPlanHeight.value) || Number(needsHeight.value) || 0;
     const age = Number(dietPlanAge.value) || Number(needsAge.value) || 0;
     const activityFactor = Number(dietPlanActivity.value) || Number(needsActivity.value) || 1.2;
@@ -1174,8 +1168,8 @@ function calculateDietExpectation() {
     const dailyGoalInput = document.getElementById('dietDailyGoalKg');
     const monthlyGoalInput = document.getElementById('dietMonthlyGoalKg');
 
-    dailyCalorieGapInput.value = Number.isFinite(calorieGapPerDay) ? `${calorieGapPerDay.toFixed(0)} سعر` : '0 سعر';
-    monthlyCalorieGapInput.value = Number.isFinite(calorieGapPerMonth) ? `${calorieGapPerMonth.toFixed(0)} سعر` : '0 سعر';
+    dailyCalorieGapInput.value = Number.isFinite(calorieGapPerDay) ? `${calorieGapPerDay.toFixed(0)} سعره` : '0 سعره';
+    monthlyCalorieGapInput.value = Number.isFinite(calorieGapPerMonth) ? `${calorieGapPerMonth.toFixed(0)} سعره` : '0 سعره';
     dailyGoalInput.value = Number.isFinite(dailyGoalKg) ? dailyGoalKg.toFixed(2) : '0.00';
     monthlyGoalInput.value = Number.isFinite(monthlyGoalKg) ? monthlyGoalKg.toFixed(2) : '0.00';
 }
@@ -1199,7 +1193,6 @@ function collectDietData() {
         duration: dietDuration.value.trim(),
         mealCount: Number(mealCount.value),
         user: {
-            weight: dietPlanWeight.value,
             height: dietPlanHeight.value,
             age: dietPlanAge.value,
             activity: dietPlanActivity.value
@@ -1225,7 +1218,6 @@ function applyDietData(data) {
     dietDuration.value = data.duration || '';
     mealCount.value = data.mealCount || data.meals?.length || 3;
     const userData = data.user || {};
-    dietPlanWeight.value = userData.weight ?? '';
     dietPlanHeight.value = userData.height ?? '';
     dietPlanAge.value = userData.age ?? '';
     dietPlanActivity.value = userData.activity || '1.35';
