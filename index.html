@@ -570,6 +570,55 @@
                     </div>
                 </div>
 
+                <div class="row g-3 mb-4">
+                    <div class="col-12 col-md-3">
+                        <label for="dietPlanWeight" class="form-label fw-bold">الوزن بالكجم</label>
+                        <input type="number" id="dietPlanWeight" class="form-control" min="1" step="0.1" placeholder="مثال: 72">
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <label for="dietPlanHeight" class="form-label fw-bold">الطول بالسم</label>
+                        <input type="number" id="dietPlanHeight" class="form-control" min="1" step="0.1" placeholder="مثال: 175">
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <label for="dietPlanAge" class="form-label fw-bold">العمر</label>
+                        <input type="number" id="dietPlanAge" class="form-control" min="1" step="1" placeholder="مثال: 27">
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <label for="dietPlanActivity" class="form-label fw-bold">مستوى النشاط</label>
+                        <select id="dietPlanActivity" class="form-select">
+                            <option value="1.2">قليل جدًا</option>
+                            <option value="1.35">خفيف</option>
+                            <option value="1.45">متوسط</option>
+                            <option value="1.55">جيد</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-4 align-items-end">
+                    <div class="col-12 col-md-3">
+                        <label class="form-label fw-bold">العجز في اليوم</label>
+                        <input type="text" id="dietDailyCalorieGap" class="form-control" disabled>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <label class="form-label fw-bold">العجز خلال 30 يوم</label>
+                        <input type="text" id="dietMonthlyCalorieGap" class="form-control" disabled>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <label class="form-label fw-bold">المستهدف في اليوم</label>
+                        <input type="text" id="dietDailyGoalKg" class="form-control" disabled>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <label class="form-label fw-bold">المستهدف خلال 30 يوم</label>
+                        <input type="text" id="dietMonthlyGoalKg" class="form-control" disabled>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-4 align-items-end">
+                    <div class="col-12 col-md-12">
+                        <button type="button" id="calculateDietExpectationButton" class="btn btn-outline-primary w-100">احسب المتوقع من النظام دا</button>
+                    </div>
+                </div>
+
                 <div id="dietMeals"></div>
 
                 <h5 class="mt-4">إجمالي النظام</h5>
@@ -681,6 +730,10 @@ const needsActivityCalories = {
 const dietName = document.getElementById('dietName');
 const dietDuration = document.getElementById('dietDuration');
 const mealCount = document.getElementById('mealCount');
+const dietPlanWeight = document.getElementById('dietPlanWeight');
+const dietPlanHeight = document.getElementById('dietPlanHeight');
+const dietPlanAge = document.getElementById('dietPlanAge');
+const dietPlanActivity = document.getElementById('dietPlanActivity');
 const dietMeals = document.getElementById('dietMeals');
 const dietPlanTabs = document.getElementById('dietPlanTabs');
 const addDietPlanButton = document.getElementById('addDietPlanButton');
@@ -909,6 +962,12 @@ saveMyDataButton.addEventListener('click', function () {
     saveMyDataJson();
 });
 
+const calculateDietExpectationButton = document.getElementById('calculateDietExpectationButton');
+
+calculateDietExpectationButton.addEventListener('click', function () {
+    calculateDietExpectation();
+});
+
 function getDailyStorageKey() {
     const date = new Date();
     const year = date.getFullYear();
@@ -988,6 +1047,12 @@ function emptyDietPlan(name = 'نظام جديد') {
         name,
         duration: '',
         mealCount: 3,
+        user: {
+            weight: '',
+            height: '',
+            age: '',
+            activity: '1.35'
+        },
         meals: [emptyDietMeal('الفطار'), emptyDietMeal('الغداء'), emptyDietMeal('العشاء')],
         inbody: {}
     };
@@ -1082,6 +1147,39 @@ function updateDietTotals() {
     });
 }
 
+function calculateDietExpectation() {
+    const totalCalories = Number(String(dietTotals.calories.textContent).replace(/,/g, '')) || 0;
+
+    const weight = Number(dietPlanWeight.value) || Number(needsWeight.value) || 0;
+    const height = Number(dietPlanHeight.value) || Number(needsHeight.value) || 0;
+    const age = Number(dietPlanAge.value) || Number(needsAge.value) || 0;
+    const activityFactor = Number(dietPlanActivity.value) || Number(needsActivity.value) || 1.2;
+
+    let activityCalories = 0;
+
+    if (weight > 0 && height > 0 && age > 0) {
+        const bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+        activityCalories = bmr * activityFactor;
+    } else {
+        activityCalories = Number(String(needsCalories.textContent).replace(/,/g, '')) || 0;
+    }
+
+    const calorieGapPerDay = activityCalories - totalCalories;
+    const calorieGapPerMonth = calorieGapPerDay * 30;
+    const dailyGoalKg = calorieGapPerDay / 7700;
+    const monthlyGoalKg = dailyGoalKg * 30;
+
+    const dailyCalorieGapInput = document.getElementById('dietDailyCalorieGap');
+    const monthlyCalorieGapInput = document.getElementById('dietMonthlyCalorieGap');
+    const dailyGoalInput = document.getElementById('dietDailyGoalKg');
+    const monthlyGoalInput = document.getElementById('dietMonthlyGoalKg');
+
+    dailyCalorieGapInput.value = Number.isFinite(calorieGapPerDay) ? `${calorieGapPerDay.toFixed(0)} سعر` : '0 سعر';
+    monthlyCalorieGapInput.value = Number.isFinite(calorieGapPerMonth) ? `${calorieGapPerMonth.toFixed(0)} سعر` : '0 سعر';
+    dailyGoalInput.value = Number.isFinite(dailyGoalKg) ? dailyGoalKg.toFixed(2) : '0.00';
+    monthlyGoalInput.value = Number.isFinite(monthlyGoalKg) ? monthlyGoalKg.toFixed(2) : '0.00';
+}
+
 function updateInbody() {
     Object.entries(inbodyFields).forEach(([key, ids]) => {
         const before = Number(document.getElementById(ids[0]).value);
@@ -1100,6 +1198,12 @@ function collectDietData() {
         name: dietName.value.trim(),
         duration: dietDuration.value.trim(),
         mealCount: Number(mealCount.value),
+        user: {
+            weight: dietPlanWeight.value,
+            height: dietPlanHeight.value,
+            age: dietPlanAge.value,
+            activity: dietPlanActivity.value
+        },
         meals: [...dietMeals.querySelectorAll('.meal-card')].map(card => ({
             name: card.querySelector('.meal-name').value.trim(),
             foods: [...card.querySelectorAll('tbody tr')].map(row => ({
@@ -1120,6 +1224,11 @@ function applyDietData(data) {
     dietName.value = data.name || '';
     dietDuration.value = data.duration || '';
     mealCount.value = data.mealCount || data.meals?.length || 3;
+    const userData = data.user || {};
+    dietPlanWeight.value = userData.weight ?? '';
+    dietPlanHeight.value = userData.height ?? '';
+    dietPlanAge.value = userData.age ?? '';
+    dietPlanActivity.value = userData.activity || '1.35';
     renderDietMeals(Array.isArray(data.meals) ? data.meals : []);
     Object.entries(inbodyFields).forEach(([key, ids]) => {
         const values = data.inbody?.[key] || {};
@@ -1972,6 +2081,7 @@ fetch('nutrition.json')
         renderDietMeals();
 
         renderNutritionsTable();
+        calculateDietExpectation();
 
         return fetch('diet.json');
 
