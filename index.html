@@ -808,7 +808,8 @@ function saveMyDataDraft() {
         const data = {
             weight: needsWeight.value,
             height: needsHeight.value,
-            age: needsAge.value
+            age: needsAge.value,
+            activity: needsActivity.value
         };
         localStorage.setItem(getMyDataStorageKey(), JSON.stringify(data));
     } catch (error) {
@@ -830,6 +831,9 @@ function applyMyData(data = {}) {
     if (data.weight !== undefined && data.weight !== null && data.weight !== '') needsWeight.value = data.weight;
     if (data.height !== undefined && data.height !== null && data.height !== '') needsHeight.value = data.height;
     if (data.age !== undefined && data.age !== null && data.age !== '') needsAge.value = data.age;
+    if (data.activity !== undefined && data.activity !== null && data.activity !== '') {
+        needsActivity.value = data.activity;
+    }
     calculateNeeds();
 }
 
@@ -837,7 +841,8 @@ function saveMyDataJson() {
     const payload = {
         weight: Number(needsWeight.value) || 0,
         height: Number(needsHeight.value) || 0,
-        age: Number(needsAge.value) || 0
+        age: Number(needsAge.value) || 0,
+        activity: needsActivity.value || '1.2'
     };
 
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
@@ -896,6 +901,7 @@ function calculateNeeds() {
 });
 
 needsActivity.addEventListener('change', function () {
+    saveMyDataDraft();
     calculateNeeds();
 });
 
