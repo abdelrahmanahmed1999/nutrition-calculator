@@ -1141,6 +1141,18 @@ function updateDietTotals() {
     });
 }
 
+function resetDietExpectationOutputs() {
+    const dailyCalorieGapInput = document.getElementById('dietDailyCalorieGap');
+    const monthlyCalorieGapInput = document.getElementById('dietMonthlyCalorieGap');
+    const dailyGoalInput = document.getElementById('dietDailyGoalKg');
+    const monthlyGoalInput = document.getElementById('dietMonthlyGoalKg');
+
+    dailyCalorieGapInput.value = '0 سعره';
+    monthlyCalorieGapInput.value = '0 سعره';
+    dailyGoalInput.value = '0.00';
+    monthlyGoalInput.value = '0.00';
+}
+
 function calculateDietExpectation() {
     const totalCalories = Number(String(dietTotals.calories.textContent).replace(/,/g, '')) || 0;
 
@@ -1221,6 +1233,7 @@ function applyDietData(data) {
     dietPlanHeight.value = userData.height ?? '';
     dietPlanAge.value = userData.age ?? '';
     dietPlanActivity.value = userData.activity || '1.35';
+    resetDietExpectationOutputs();
     renderDietMeals(Array.isArray(data.meals) ? data.meals : []);
     Object.entries(inbodyFields).forEach(([key, ids]) => {
         const values = data.inbody?.[key] || {};
@@ -1262,6 +1275,7 @@ function switchDietPlan(index) {
 
     if (index === activeDietIndex && dietPanelOpen) {
         saveActiveDietPlan();
+        resetDietExpectationOutputs();
         dietPanelOpen = false;
         renderDietPlanTabs();
         return;
@@ -1269,6 +1283,7 @@ function switchDietPlan(index) {
 
     saveActiveDietPlan();
     activeDietIndex = index;
+    resetDietExpectationOutputs();
     applyDietData(dietPlans[activeDietIndex]);
     dietPanelOpen = true;
     renderDietPlanTabs();
@@ -1278,6 +1293,7 @@ function addDietPlan() {
     saveActiveDietPlan();
     dietPlans.push(emptyDietPlan(`نظام ${dietPlans.length + 1}`));
     activeDietIndex = dietPlans.length - 1;
+    resetDietExpectationOutputs();
     applyDietData(dietPlans[activeDietIndex]);
     dietPanelOpen = true;
     renderDietPlanTabs();
@@ -1321,6 +1337,7 @@ dietPlanTabs.addEventListener('click', event => {
         if (index < activeDietIndex) activeDietIndex -= 1;
         else if (index === activeDietIndex) activeDietIndex = Math.min(activeDietIndex, dietPlans.length - 1);
         if (dietPlans.length) {
+            resetDietExpectationOutputs();
             applyDietData(dietPlans[activeDietIndex]);
             dietPanelOpen = wasOpen;
         } else {
@@ -1328,6 +1345,7 @@ dietPlanTabs.addEventListener('click', event => {
             dietPanelOpen = false;
             dietName.value = '';
             mealCount.value = 3;
+            resetDietExpectationOutputs();
             renderDietMeals();
         }
         renderDietPlanTabs();
