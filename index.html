@@ -103,6 +103,19 @@
             color: #fff;
         }
 
+        .info-paragraph-card {
+            padding: 1rem;
+            border-radius: 12px;
+            background: #fff;
+            border: 1px solid #e7eaf0;
+            box-shadow: 0 2px 8px rgba(0,0,0,.03);
+        }
+
+        .info-paragraph-card textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
         .diet-plan-layout {
             display: flex;
             flex-direction: column;
@@ -203,6 +216,16 @@
                     data-bs-target="#daily"
                     type="button">
                 أكلت النهارده
+            </button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+            <button class="nav-link"
+                    id="info-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#info"
+                    type="button">
+                معلومات
             </button>
         </li>
 
@@ -368,6 +391,30 @@
                         </tfoot>
                     </table>
                 </div>
+
+            </div>
+
+        </div>
+
+        <!-- ==================== Info ==================== -->
+
+        <div class="tab-pane fade" id="info">
+
+            <div class="card main-card p-3 p-md-4">
+
+                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                    <div>
+                        <h4 class="mb-1">معلومات</h4>
+                        <div class="text-muted">أضف عنوانًا ومحتوى طويلًا في كل فقرة، ويمكنك إضافة أكثر من فقرة</div>
+                    </div>
+
+                    <div class="d-flex gap-2 flex-wrap">
+                        <button type="button" id="addInfoParagraph" class="btn btn-primary">إضافة فقرة</button>
+                        <button type="button" id="saveInfoButton" class="btn btn-success">حفظ info.json</button>
+                    </div>
+                </div>
+
+                <div id="infoParagraphs" class="d-grid gap-3"></div>
 
             </div>
 
@@ -658,6 +705,94 @@ const dailyTotals = {
     fat: document.getElementById('dailyFatTotal'),
     carbs: document.getElementById('dailyCarbsTotal')
 };
+
+const infoParagraphs = document.getElementById('infoParagraphs');
+const addInfoParagraphButton = document.getElementById('addInfoParagraph');
+const saveInfoButton = document.getElementById('saveInfoButton');
+
+function getInfoStorageKey() {
+    return 'nutrition-info-draft';
+}
+
+function emptyInfoParagraph() {
+    return { title: '', body: '' };
+}
+
+function createInfoParagraphRow(paragraph = emptyInfoParagraph()) {
+    const row = document.createElement('div');
+    row.className = 'info-paragraph-card';
+
+    row.innerHTML = `
+        <div class="row g-3">
+            <div class="col-12">
+                <label class="form-label fw-bold">العنوان</label>
+                <input type="text" class="form-control info-title" placeholder="ادخل العنوان" value="${escapeHtml(paragraph.title || '')}">
+            </div>
+            <div class="col-12">
+                <label class="form-label fw-bold">المحتوى</label>
+                <textarea class="form-control info-body" rows="6" placeholder="ادخل النص الكبير هنا...">${escapeHtml(paragraph.body || '')}</textarea>
+            </div>
+            <div class="col-12 text-end">
+                <button type="button" class="btn btn-outline-danger remove-info-paragraph">حذف</button>
+            </div>
+        </div>
+    `;
+
+    return row;
+}
+
+function renderInfoParagraphs(paragraphs = []) {
+    infoParagraphs.innerHTML = '';
+
+    const items = Array.isArray(paragraphs) && paragraphs.length ? paragraphs : [emptyInfoParagraph()];
+
+    items.forEach(paragraph => {
+        infoParagraphs.appendChild(createInfoParagraphRow(paragraph));
+    });
+}
+
+function collectInfoParagraphs() {
+    return [...infoParagraphs.querySelectorAll('.info-paragraph-card')].map(row => {
+        const title = row.querySelector('.info-title').value.trim();
+        const body = row.querySelector('.info-body').value.trim();
+        return { title, body };
+    }).filter(item => item.title || item.body);
+}
+
+function saveInfoDraft() {
+    try {
+        const data = collectInfoParagraphs();
+        localStorage.setItem(getInfoStorageKey(), JSON.stringify(data));
+    } catch (error) {
+        console.error('تعذر حفظ مسودة معلومات', error);
+    }
+}
+
+function loadSavedInfoParagraphs() {
+    try {
+        const saved = JSON.parse(localStorage.getItem(getInfoStorageKey()) || '[]');
+        return Array.isArray(saved) ? saved : [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function saveInfoJson() {
+    const payload = { paragraphs: collectInfoParagraphs() };
+
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'info.json';
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+
+    saveInfoDraft();
+    alert('تم تنزيل info.json. أرفعه بجانب الصفحة ليتم حفظ المعلومات.');
+}
 
 function calculateNeeds() {
 
@@ -1681,6 +1816,39 @@ saveJsonButton.addEventListener('click', function () {
 
 });
 
+addInfoParagraphButton.addEventListener('click', function () {
+    infoParagraphs.appendChild(createInfoParagraphRow());
+    saveInfoDraft();
+});
+
+saveInfoButton.addEventListener('click', function () {
+    saveInfoJson();
+});
+
+infoParagraphs.addEventListener('input', function (event) {
+    if (event.target.classList.contains('info-title') || event.target.classList.contains('info-body')) {
+        saveInfoDraft();
+    }
+});
+
+infoParagraphs.addEventListener('click', function (event) {
+    if (!event.target.classList.contains('remove-info-paragraph')) {
+        return;
+    }
+
+    const row = event.target.closest('.info-paragraph-card');
+    if (!row) {
+        return;
+    }
+
+    row.remove();
+
+    if (!infoParagraphs.querySelector('.info-paragraph-card')) {
+        infoParagraphs.appendChild(createInfoParagraphRow());
+    }
+
+    saveInfoDraft();
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -1746,6 +1914,41 @@ fetch('nutrition.json')
             applyDietData(dietPlans[activeDietIndex]);
             renderDietPlanTabs();
         }
+
+        return fetch('info.json');
+
+    })
+
+    .then(response => {
+
+        if (!response || !response.ok) {
+            renderInfoParagraphs(loadSavedInfoParagraphs());
+            return null;
+        }
+
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        if (data) {
+            const paragraphs = Array.isArray(data.paragraphs)
+                ? data.paragraphs
+                : Array.isArray(data.info)
+                    ? data.info
+                    : Array.isArray(data)
+                        ? data
+                        : [];
+
+            if (paragraphs.length) {
+                renderInfoParagraphs(paragraphs);
+                saveInfoDraft();
+                return;
+            }
+        }
+
+        renderInfoParagraphs(loadSavedInfoParagraphs());
 
     })
 
