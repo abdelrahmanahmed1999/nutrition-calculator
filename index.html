@@ -444,8 +444,12 @@
                     </div>
                 </div>
 
-                <div class="mt-4">
-                    <label for="needsActivity" class="form-label fw-bold">مستوى النشاط</label>
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-4">
+                    <label for="needsActivity" class="form-label fw-bold mb-0">مستوى النشاط</label>
+                    <button type="button" id="saveMyDataButton" class="btn btn-success btn-sm">حفظ mydata.json</button>
+                </div>
+
+                <div class="mt-2">
                     <select id="needsActivity" class="form-select">
                         <option value="1.2">قليل جدًا (مكتب + بدون رياضة)</option>
                         <option value="1.35">نشاط خفيف (تمرين 1–3 مرات أسبوعيًا)</option>
@@ -706,6 +710,7 @@ const dailyTotals = {
     carbs: document.getElementById('dailyCarbsTotal')
 };
 
+const saveMyDataButton = document.getElementById('saveMyDataButton');
 const infoParagraphs = document.getElementById('infoParagraphs');
 const addInfoParagraphButton = document.getElementById('addInfoParagraph');
 const saveInfoButton = document.getElementById('saveInfoButton');
@@ -794,6 +799,61 @@ function saveInfoJson() {
     alert('تم تنزيل info.json. أرفعه بجانب الصفحة ليتم حفظ المعلومات.');
 }
 
+function getMyDataStorageKey() {
+    return 'nutrition-mydata';
+}
+
+function saveMyDataDraft() {
+    try {
+        const data = {
+            weight: needsWeight.value,
+            height: needsHeight.value,
+            age: needsAge.value
+        };
+        localStorage.setItem(getMyDataStorageKey(), JSON.stringify(data));
+    } catch (error) {
+        console.error('تعذر حفظ بيانات الاحتياجات', error);
+    }
+}
+
+function loadSavedMyData() {
+    try {
+        const saved = JSON.parse(localStorage.getItem(getMyDataStorageKey()) || '{}');
+        return saved && typeof saved === 'object' ? saved : {};
+    } catch (error) {
+        return {};
+    }
+}
+
+function applyMyData(data = {}) {
+    if (!data || typeof data !== 'object') return;
+    if (data.weight !== undefined && data.weight !== null && data.weight !== '') needsWeight.value = data.weight;
+    if (data.height !== undefined && data.height !== null && data.height !== '') needsHeight.value = data.height;
+    if (data.age !== undefined && data.age !== null && data.age !== '') needsAge.value = data.age;
+    calculateNeeds();
+}
+
+function saveMyDataJson() {
+    const payload = {
+        weight: Number(needsWeight.value) || 0,
+        height: Number(needsHeight.value) || 0,
+        age: Number(needsAge.value) || 0
+    };
+
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'mydata.json';
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+
+    saveMyDataDraft();
+    alert('تم تنزيل mydata.json.');
+}
+
 function calculateNeeds() {
 
     const weight = Number(needsWeight.value);
@@ -824,9 +884,23 @@ function calculateNeeds() {
     needsCarbsHigh.textContent = `${formatNumber(weight * 3)}–${formatNumber(weight * 4)} جم`;
 }
 
-[needsWeight, needsHeight, needsAge, needsActivity].forEach(input => {
-    input.addEventListener('input', calculateNeeds);
-    input.addEventListener('change', calculateNeeds);
+[needsWeight, needsHeight, needsAge].forEach(input => {
+    input.addEventListener('input', function () {
+        saveMyDataDraft();
+        calculateNeeds();
+    });
+    input.addEventListener('change', function () {
+        saveMyDataDraft();
+        calculateNeeds();
+    });
+});
+
+needsActivity.addEventListener('change', function () {
+    calculateNeeds();
+});
+
+saveMyDataButton.addEventListener('click', function () {
+    saveMyDataJson();
 });
 
 function getDailyStorageKey() {
@@ -1944,11 +2018,35 @@ fetch('nutrition.json')
             if (paragraphs.length) {
                 renderInfoParagraphs(paragraphs);
                 saveInfoDraft();
-                return;
+                return fetch('mydata.json');
             }
         }
 
         renderInfoParagraphs(loadSavedInfoParagraphs());
+        return fetch('mydata.json');
+
+    })
+
+    .then(response => {
+
+        if (!response || !response.ok) {
+            applyMyData(loadSavedMyData());
+            return null;
+        }
+
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        if (data) {
+            applyMyData(data);
+            saveMyDataDraft();
+            return;
+        }
+
+        applyMyData(loadSavedMyData());
 
     })
 
