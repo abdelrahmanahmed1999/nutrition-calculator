@@ -59,7 +59,7 @@
           "name": "وجبة 4 الغذاء الساعة 10.5am",
           "foods": [
             {
-              "category": "نشويات",
+              "category": "بقوليات",
               "nutritionName": "رز",
               "grams": "100"
             },
@@ -118,6 +118,11 @@
       "name": "النظام التانى [دا بيسهدف الدهون جامد بس شرط يكون PBF اعلى من 20% علشان مقلل البروتين] مع 3 ايام جيم",
       "duration": "شهر من تاريخ 25/02/2026 الى 27/6/2026",
       "mealCount": 5,
+      "user": {
+        "height": "",
+        "age": "",
+        "activity": "1.35"
+      },
       "meals": [
         {
           "name": "وجبة 1 الفطار الساعة 7.5am",
@@ -168,7 +173,7 @@
           "name": "وجبة 4 الغذاء الساعة 10.5am",
           "foods": [
             {
-              "category": "نشويات",
+              "category": "بقوليات",
               "nutritionName": "رز",
               "grams": "100"
             },
@@ -297,7 +302,7 @@
           "name": "وجبة 4  الغذاء الساعة (6 8or ) pm",
           "foods": [
             {
-              "category": "نشويات",
+              "category": "بقوليات",
               "nutritionName": "رز",
               "grams": "200"
             },
@@ -416,7 +421,7 @@
           "name": "وجبة 4  الغذاء الساعة (6 8or ) pm",
           "foods": [
             {
-              "category": "نشويات",
+              "category": "بقوليات",
               "nutritionName": "رز",
               "grams": "200"
             },
@@ -482,7 +487,7 @@
             {
               "category": "نشويات",
               "nutritionName": "عيش بلدي",
-              "grams": "30"
+              "grams": "60"
             },
             {
               "category": "ألبان وجبن",
@@ -502,7 +507,7 @@
             {
               "category": "فواكه",
               "nutritionName": "تفاح",
-              "grams": "100"
+              "grams": "150"
             },
             {
               "category": "خضار",
@@ -550,7 +555,7 @@
           "name": "وجبة 4  الغذاء الساعة (6 8or ) pm",
           "foods": [
             {
-              "category": "نشويات",
+              "category": "بقوليات",
               "nutritionName": "رز",
               "grams": "200"
             },
@@ -572,7 +577,7 @@
             {
               "category": "فواكه",
               "nutritionName": "بطيخ",
-              "grams": "100"
+              "grams": "150"
             }
           ]
         }
