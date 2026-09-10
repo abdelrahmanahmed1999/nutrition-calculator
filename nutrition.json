@@ -42,30 +42,6 @@
         "notes": ""
       },
       {
-        "name": "رز",
-        "calories": 130,
-        "protein": 2.7,
-        "fat": 0.3,
-        "carbs": 28,
-        "notes": "5 ملاعق = 70 جرام"
-      },
-      {
-        "name": "معكرونة",
-        "calories": 150,
-        "protein": 5.8,
-        "fat": 0.9,
-        "carbs": 31,
-        "notes": ""
-      },
-      {
-        "name": "بطاطس",
-        "calories": 85,
-        "protein": 1.9,
-        "fat": 0.1,
-        "carbs": 20,
-        "notes": ""
-      },
-      {
         "name": "بقسماط",
         "calories": 400,
         "protein": 13,
@@ -125,6 +101,22 @@
       }
     ],
     "بقوليات": [
+      {
+        "name": "رز",
+        "calories": 130,
+        "protein": 2.7,
+        "fat": 0.3,
+        "carbs": 28,
+        "notes": "5 ملاعق = 70 جرام"
+      },
+      {
+        "name": "معكرونة",
+        "calories": 150,
+        "protein": 5.8,
+        "fat": 0.9,
+        "carbs": 31,
+        "notes": ""
+      },
       {
         "name": "شوفان",
         "calories": 389,
@@ -289,6 +281,14 @@
       }
     ],
     "خضار": [
+      {
+        "name": "بطاطس",
+        "calories": 85,
+        "protein": 1.9,
+        "fat": 0.1,
+        "carbs": 20,
+        "notes": ""
+      },
       {
         "name": "خس",
         "calories": 15,
