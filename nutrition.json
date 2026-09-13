@@ -466,6 +466,30 @@
         "fat": 0.3,
         "carbs": 13.3,
         "notes": ""
+      },
+      {
+        "name": "الشمام",
+        "calories": 34,
+        "protein": 0.8,
+        "fat": 0.2,
+        "carbs": 8.2,
+        "notes": ""
+      },
+      {
+        "name": "الخوخ",
+        "calories": 39,
+        "protein": 0.9,
+        "fat": 0.3,
+        "carbs": 9.5,
+        "notes": ""
+      },
+      {
+        "name": "المشمش",
+        "calories": 48,
+        "protein": 1.4,
+        "fat": 0.4,
+        "carbs": 11.1,
+        "notes": ""
       }
     ]
   }
