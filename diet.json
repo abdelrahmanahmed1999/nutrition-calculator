@@ -472,13 +472,13 @@
       }
     },
     {
-      "name": "النظام الخامس [دا بيستهدف الدهون جامد و بيحافظ او بيزود العضلات شوية] مع 3 ايام جيم",
-      "duration": "",
+      "name": "النظام الخامس [دا بيستهدف الدهون  و بيحافظ  العضلات شوية] مع 3 ايام كارديو خفيف الصبح على الريق قبل الفطار مع مشى من يوم الاحد للخميس من 8000 ل 10000 خطوة",
+      "duration": "28 يوم من تاريخ 29/08/206  ل 26/08/2026",
       "mealCount": 5,
       "user": {
         "height": "172",
         "age": "27",
-        "activity": "1.35"
+        "activity": "1.2"
       },
       "meals": [
         {
@@ -487,7 +487,7 @@
             {
               "category": "نشويات",
               "nutritionName": "عيش بلدي",
-              "grams": "60"
+              "grams": "40"
             },
             {
               "category": "ألبان وجبن",
@@ -537,7 +537,7 @@
             {
               "category": "نشويات",
               "nutritionName": "عيش بلدي",
-              "grams": "30"
+              "grams": "20"
             },
             {
               "category": "لحوم",
@@ -547,7 +547,7 @@
             {
               "category": "فواكه",
               "nutritionName": "تمر",
-              "grams": "35"
+              "grams": "15"
             }
           ]
         },
@@ -576,7 +576,7 @@
             },
             {
               "category": "فواكه",
-              "nutritionName": "بطيخ",
+              "nutritionName": "تفاح",
               "grams": "150"
             }
           ]
@@ -585,23 +585,23 @@
       "inbody": {
         "weight": {
           "before": "67.2",
-          "after": ""
+          "after": "66.6"
         },
         "muscleMass": {
           "before": "32",
-          "after": ""
+          "after": "32.7"
         },
         "bodyFat": {
           "before": "15.3",
-          "after": ""
+          "after": "13.2"
         },
         "bodyFatMass": {
           "before": "10.3",
-          "after": ""
+          "after": "8.8"
         },
         "water": {
           "before": "41.8",
-          "after": ""
+          "after": "42.4"
         }
       }
     }
