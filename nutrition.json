@@ -98,6 +98,38 @@
         "fat": 0.41,
         "carbs": 4.83,
         "notes": ""
+      },
+      {
+        "name": "رومى تركى مدخم",
+        "calories": 110,
+        "protein": 23,
+        "fat": 2,
+        "carbs": 3,
+        "notes": ""
+      },
+      {
+        "name": "بسطرمة",
+        "calories": 180,
+        "protein": 28,
+        "fat": 6,
+        "carbs": 1,
+        "notes": ""
+      },
+      {
+        "name": "لانشون بيف",
+        "calories": 280,
+        "protein": 13,
+        "fat": 23,
+        "carbs": 6,
+        "notes": ""
+      },
+      {
+        "name": "رومى",
+        "calories": 400,
+        "protein": 27,
+        "fat": 30,
+        "carbs": 3,
+        "notes": ""
       }
     ],
     "بقوليات": [
