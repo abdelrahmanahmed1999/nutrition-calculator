@@ -530,6 +530,14 @@
         "fat": 1,
         "carbs": 14.3,
         "notes": ""
+      },
+      {
+        "name": "الرمان",
+        "calories": 83,
+        "protein": 1.7,
+        "fat": 1.2,
+        "carbs": 18.7,
+        "notes": ""
       }
     ]
   }
