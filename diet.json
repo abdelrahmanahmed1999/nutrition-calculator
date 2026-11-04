@@ -1112,8 +1112,13 @@
             },
             {
               "category": "فواكه",
-              "nutritionName": "تفاح",
-              "grams": "150"
+              "nutritionName": "بلح احمر",
+              "grams": "80"
+            },
+            {
+              "category": "فواكه",
+              "nutritionName": "بلح اصفر",
+              "grams": "30"
             }
           ]
         }
