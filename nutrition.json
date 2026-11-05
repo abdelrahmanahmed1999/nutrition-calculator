@@ -202,6 +202,22 @@
         "fat": 0.2,
         "carbs": 88,
         "notes": ""
+      },
+      {
+        "name": "نوتيلا هياثى سبريد ميلكاتو",
+        "calories": 353,
+        "protein": 10,
+        "fat": 30,
+        "carbs": 11,
+        "notes": ""
+      },
+      {
+        "name": "نوتيلا",
+        "calories": 539,
+        "protein": 6.3,
+        "fat": 31,
+        "carbs": 57.5,
+        "notes": ""
       }
     ],
     "بقوليات": [
@@ -868,22 +884,6 @@
         "fat": 36,
         "carbs": 43,
         "notes": "السكر المضاف0 جرام"
-      },
-      {
-        "name": "نوتيلا هياثى سبريد ميلكاتو",
-        "calories": 353,
-        "protein": 10,
-        "fat": 30,
-        "carbs": 11,
-        "notes": ""
-      },
-      {
-        "name": "نوتيلا",
-        "calories": 539,
-        "protein": 6.3,
-        "fat": 31,
-        "carbs": 57.5,
-        "notes": ""
       }
     ],
     "icecreams": [
