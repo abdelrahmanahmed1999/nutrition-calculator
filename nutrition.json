@@ -218,6 +218,14 @@
         "fat": 31,
         "carbs": 57.5,
         "notes": ""
+      },
+      {
+        "name": "زبدة فول سوداني",
+        "calories": 588,
+        "protein": 25,
+        "fat": 50,
+        "carbs": 20,
+        "notes": ""
       }
     ],
     "بقوليات": [
@@ -259,14 +267,6 @@
         "protein": 26,
         "fat": 49,
         "carbs": 16,
-        "notes": ""
-      },
-      {
-        "name": "زبدة فول سوداني",
-        "calories": 588,
-        "protein": 25,
-        "fat": 50,
-        "carbs": 20,
         "notes": ""
       },
       {
