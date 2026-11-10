@@ -1441,10 +1441,10 @@ function renderFoodRow(category, nutrition, index, editing = false) {
         row.innerHTML = `
             <td><input class="form-control food-name" value="${escapeHtml(nutrition.name)}" placeholder="اسم المنتج"></td>
             <td><input class="form-control food-calories" type="number" min="0" step="0.01" value="${nutrition.calories ?? ''}" placeholder="السعرات"></td>
-            ${unitColumns}
             <td><input class="form-control food-protein" type="number" min="0" step="0.01" value="${nutrition.protein ?? ''}" placeholder="البروتين"></td>
             <td><input class="form-control food-fat" type="number" min="0" step="0.01" value="${nutrition.fat ?? ''}" placeholder="الدهون"></td>
             <td><input class="form-control food-carbs" type="number" min="0" step="0.01" value="${nutrition.carbs ?? ''}" placeholder="الكارب"></td>
+            ${unitColumns}
             <td><input class="form-control food-notes" value="${escapeHtml(nutrition.notes)}" placeholder="ملاحظات"></td>
             <td class="text-nowrap">
                 <button type="button" class="btn btn-sm btn-success save-food">حفظ</button>
@@ -1458,12 +1458,12 @@ function renderFoodRow(category, nutrition, index, editing = false) {
     row.innerHTML = `
         <td class="fw-bold">${escapeHtml(nutrition.name)}</td>
         <td>${formatNumber(nutrition.calories)}</td>
-        ${unitFood
-            ? `<td>${formatNumber(nutrition.unitWeight)}</td><td>${formatNumber(calculateUnitCalories(nutrition.calories ?? null, nutrition.unitWeight ?? null))}</td>`
-            : ''}
         <td>${formatNumber(nutrition.protein)}</td>
         <td>${formatNumber(nutrition.fat)}</td>
         <td>${formatNumber(nutrition.carbs)}</td>
+        ${unitFood
+            ? `<td>${formatNumber(nutrition.unitWeight)}</td><td>${formatNumber(calculateUnitCalories(nutrition.calories ?? null, nutrition.unitWeight ?? null))}</td>`
+            : ''}
         <td>${nutrition.notes ? `<span class="note">${escapeHtml(nutrition.notes)}</span>` : '-'}</td>
         <td class="text-nowrap">
             <button type="button" class="btn btn-sm btn-outline-primary edit-food">تعديل</button>
@@ -1906,13 +1906,13 @@ function renderNutritionsTable(search = '') {
 
                             <th>السعرات / 100 جم</th>
 
-                            ${isUnitFoodCategory(category) ? '<th>وزن الوحدة (جم)</th><th>سعرات الوحدة</th>' : ''}
-
                             <th>البروتين / 100 جم</th>
 
                             <th>الدهون / 100 جم</th>
 
                             <th>الكارب / 100 جم</th>
+
+                            ${isUnitFoodCategory(category) ? '<th>وزن الوحدة (جم)</th><th>سعرات الوحدة</th>' : ''}
 
                             <th>ملاحظات</th>
 
