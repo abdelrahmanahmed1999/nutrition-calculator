@@ -1005,6 +1005,26 @@ function saveDailyRows() {
     }
 }
 
+function isUnitFoodCategory(category) {
+
+    const normalizedCategory = category.toLowerCase();
+
+    return normalizedCategory.includes('icecream')
+        || normalizedCategory.includes('ice cream')
+        || normalizedCategory.includes('شباسى')
+        || normalizedCategory.includes('شيبسى')
+        || normalizedCategory.includes('شيبسي')
+        || normalizedCategory.includes('حلويات');
+}
+
+function calculateUnitCalories(calories, unitWeight) {
+
+    if (calories === null || unitWeight === null) {
+        return null;
+    }
+
+    return Number((calories * unitWeight / 100).toFixed(2));
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -1389,7 +1409,7 @@ function readFoodRow(row) {
         return value === '' ? null : Number(value);
     };
 
-    return {
+    const food = {
         name: row.querySelector('.food-name').value.trim(),
         calories: readNumber('.food-calories'),
         protein: readNumber('.food-protein'),
@@ -1397,6 +1417,13 @@ function readFoodRow(row) {
         carbs: readNumber('.food-carbs'),
         notes: row.querySelector('.food-notes').value.trim()
     };
+
+    if (isUnitFoodCategory(row.dataset.category)) {
+        food.unitWeight = readNumber('.food-unit-weight');
+        food.unitCalories = calculateUnitCalories(food.calories, food.unitWeight);
+    }
+
+    return food;
 }
 
 function renderFoodRow(category, nutrition, index, editing = false) {
@@ -1404,11 +1431,17 @@ function renderFoodRow(category, nutrition, index, editing = false) {
     const row = document.createElement('tr');
     row.dataset.category = category;
     row.dataset.index = index;
+    const unitFood = isUnitFoodCategory(category);
+    const unitColumns = unitFood
+        ? `<td><input class="form-control food-unit-weight" type="number" min="0" step="0.01" value="${nutrition.unitWeight ?? ''}" placeholder="وزن الوحدة"></td>
+            <td><input class="form-control food-unit-calories" type="number" value="${calculateUnitCalories(nutrition.calories ?? null, nutrition.unitWeight ?? null) ?? ''}" readonly></td>`
+        : '';
 
     if (editing) {
         row.innerHTML = `
             <td><input class="form-control food-name" value="${escapeHtml(nutrition.name)}" placeholder="اسم المنتج"></td>
             <td><input class="form-control food-calories" type="number" min="0" step="0.01" value="${nutrition.calories ?? ''}" placeholder="السعرات"></td>
+            ${unitColumns}
             <td><input class="form-control food-protein" type="number" min="0" step="0.01" value="${nutrition.protein ?? ''}" placeholder="البروتين"></td>
             <td><input class="form-control food-fat" type="number" min="0" step="0.01" value="${nutrition.fat ?? ''}" placeholder="الدهون"></td>
             <td><input class="form-control food-carbs" type="number" min="0" step="0.01" value="${nutrition.carbs ?? ''}" placeholder="الكارب"></td>
@@ -1425,6 +1458,9 @@ function renderFoodRow(category, nutrition, index, editing = false) {
     row.innerHTML = `
         <td class="fw-bold">${escapeHtml(nutrition.name)}</td>
         <td>${formatNumber(nutrition.calories)}</td>
+        ${unitFood
+            ? `<td>${formatNumber(nutrition.unitWeight)}</td><td>${formatNumber(calculateUnitCalories(nutrition.calories ?? null, nutrition.unitWeight ?? null))}</td>`
+            : ''}
         <td>${formatNumber(nutrition.protein)}</td>
         <td>${formatNumber(nutrition.fat)}</td>
         <td>${formatNumber(nutrition.carbs)}</td>
@@ -1870,6 +1906,8 @@ function renderNutritionsTable(search = '') {
 
                             <th>السعرات / 100 جم</th>
 
+                            ${isUnitFoodCategory(category) ? '<th>وزن الوحدة (جم)</th><th>سعرات الوحدة</th>' : ''}
+
                             <th>البروتين / 100 جم</th>
 
                             <th>الدهون / 100 جم</th>
@@ -1988,6 +2026,31 @@ nutritionsTables.addEventListener('click', function (event) {
         }
     }
 
+});
+
+nutritionsTables.addEventListener('input', event => {
+
+    const row = event.target.closest('tr');
+
+    if (!row || !isUnitFoodCategory(row.dataset.category)) {
+        return;
+    }
+
+    const unitCaloriesInput = row.querySelector('.food-unit-calories');
+
+    if (!unitCaloriesInput) {
+        return;
+    }
+
+    const calories = Number(row.querySelector('.food-calories').value);
+    const unitWeight = Number(row.querySelector('.food-unit-weight').value);
+    const hasCalories = row.querySelector('.food-calories').value.trim() !== '';
+    const hasUnitWeight = row.querySelector('.food-unit-weight').value.trim() !== '';
+    const unitCalories = hasCalories && hasUnitWeight
+        ? calculateUnitCalories(calories, unitWeight)
+        : null;
+
+    unitCaloriesInput.value = unitCalories === null ? '' : unitCalories;
 });
 
 async function saveNutritionJson() {
