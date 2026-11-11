@@ -727,6 +727,26 @@
         "unitWeight": 55,
         "unitCalories": 292.6
       },
+        {
+        "name": "كرانشى بالفلفل الحلو",
+        "calories": 500,
+        "protein": 8,
+        "fat": 30,
+        "carbs": 50,
+        "notes": "",
+        "unitWeight": 50,
+        "unitCalories": 250
+      },
+      {
+        "name": "بريك بالجبنة",
+        "calories": 505,
+        "protein": 7.6,
+        "fat": 31,
+        "carbs": 53,
+        "notes": "السكر المضاف 0 جرام",
+        "unitWeight": 60,
+        "unitCalories": 303
+      },
       {
         "name": "شيبسي Long Chips",
         "calories": 513.3,
@@ -928,14 +948,14 @@
         "unitCalories": 145.8
       },
       {
-        "name": "بسكوت شمعدان",
+        "name": "بسكوت شمعدان بالشكولاته",
         "calories": 510,
         "protein": 4.1,
         "fat": 26,
         "carbs": 65,
-        "notes": "السكر المضاف ل ١٠٠ هو ٣٧ جرام",
-        "unitWeight": 18,
-        "unitCalories": 91.8
+        "notes": "السكر المضاف ل ١٠٠ هو ٣٧ جرام و وزن الواحده 7 جرام",
+        "unitWeight": 53,
+        "unitCalories": 270.3
       },
       {
         "name": "بسكويت ويفر محشى بكريمة البندق بدون سكر مضاف - Verde",
@@ -1004,6 +1024,16 @@
         "notes": "",
         "unitWeight": 16,
         "unitCalories": 82.4
+      },
+      {
+        "name": "بسكوت شمعدان بالشكولاته قطعه واحده",
+        "calories": 510,
+        "protein": 4.1,
+        "fat": 26,
+        "carbs": 65,
+        "notes": "السكر المضاف ل ١٠٠ هو ٣٧ جرام",
+        "unitWeight": 18,
+        "unitCalories": 91.8
       },
       {
         "name": "ساندويتش بيمبو بالشكولاته",
