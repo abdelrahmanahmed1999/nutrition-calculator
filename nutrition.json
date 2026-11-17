@@ -140,7 +140,15 @@
         "notes": ""
       },
       {
-        "name": "مايونيز لايت",
+        "name": "كاتشب هاينز",
+        "calories": 97,
+        "protein": 1.1,
+        "fat": 0.1,
+        "carbs": 23,
+        "notes": "السكريات المضافة 18 جرام"
+      },
+      {
+        "name": "مايونيز هاينز لايت",
         "calories": 213,
         "protein": 0.2,
         "fat": 20,
@@ -148,7 +156,7 @@
         "notes": "السكر المضاف ٤ جرام"
       },
       {
-        "name": "مايونيز عادى",
+        "name": "مايونيز هاينز",
         "calories": 353,
         "protein": 0.3,
         "fat": 36,
@@ -164,7 +172,15 @@
         "notes": "السكر المضاف ٣.٣ جرام"
       },
       {
-        "name": "مربى لايت",
+        "name": "مربى فيتراك",
+        "calories": 240,
+        "protein": 0,
+        "fat": 0,
+        "carbs": 60,
+        "notes": "السكريات المضافة 50 جرام"
+      },
+      {
+        "name": "مربى فيتراك لايت",
         "calories": 160,
         "protein": 0,
         "fat": 0,
@@ -242,6 +258,14 @@
         "fat": 37.5,
         "carbs": 43.75,
         "notes": "السكر المضاف 12.5 جرام"
+      },
+      {
+        "name": "جبنة شيدر لايت المراعي",
+        "calories": 235,
+        "protein": 15,
+        "fat": 15,
+        "carbs": 7,
+        "notes": "وزن الواحده 20 جرام"
       }
     ],
     "بقوليات": [
@@ -684,6 +708,16 @@
         "fat": 8.5,
         "carbs": 25.2,
         "notes": "القيم ل 105 مل العبوة و السكر المضاف 13.65 جرام"
+      },
+      {
+        "name": "icecream mega",
+        "calories": 244,
+        "protein": 2.3,
+        "fat": 15.8,
+        "carbs": 23.2,
+        "notes": "القيم ل 95 مل العبوة و السكريات المضافة: 16.8 جرام",
+        "unitWeight": null,
+        "unitCalories": null
       }
     ],
     "شباسى": [
@@ -776,6 +810,46 @@
         "unitCalories": 256.8
       },
       {
+        "name": "ويندوز بالجبنة",
+        "calories": 582,
+        "protein": 8,
+        "fat": 30,
+        "carbs": 70,
+        "notes": "السكريات المضافة 1 جرام",
+        "unitWeight": 62,
+        "unitCalories": 360.84
+      },
+      {
+        "name": "صان بايتس بالطماطم",
+        "calories": 450,
+        "protein": 9,
+        "fat": 20,
+        "carbs": 70,
+        "notes": "",
+        "unitWeight": 52,
+        "unitCalories": 234
+      },
+      {
+        "name": "bake rolls",
+        "calories": 451,
+        "protein": 12,
+        "fat": 15,
+        "carbs": 67,
+        "notes": "",
+        "unitWeight": 53,
+        "unitCalories": 239.03
+      },
+      {
+        "name": "فشار توتس شكولاته",
+        "calories": 433,
+        "protein": 4,
+        "fat": 12.8,
+        "carbs": 79,
+        "notes": "",
+        "unitWeight": 43,
+        "unitCalories": 186.19
+      },
+      {
         "name": "balance",
         "calories": 400,
         "protein": 23.3,
@@ -846,6 +920,26 @@
         "notes": "السكر المضاف ل١٠٠ هو ٢١",
         "unitWeight": 45,
         "unitCalories": 221.4
+      },
+      {
+        "name": "بسكويت أولكر شاى",
+        "calories": 452,
+        "protein": 6.8,
+        "fat": 14.4,
+        "carbs": 72.8,
+        "notes": "السكريات المضافة 20.4 جرام",
+        "unitWeight": 36,
+        "unitCalories": 162.72
+      },
+      {
+        "name": "بسكويت ريتش بيك شاى",
+        "calories": 480,
+        "protein": 8,
+        "fat": 18,
+        "carbs": 71,
+        "notes": "السكريات المضافة 23 جرام",
+        "unitWeight": 62,
+        "unitCalories": 297.6
       },
       {
         "name": "بسكوت بسكريم",
@@ -936,6 +1030,16 @@
         "notes": "وزن الواحده  ٦ جرام و السكر المضاف لل١٠٠ هو ٢٠ جرام",
         "unitWeight": 40,
         "unitCalories": 220
+      },
+      {
+        "name": "بسكويت lutsi basic caramel",
+        "calories": 433.9,
+        "protein": 5.3,
+        "fat": 11.4,
+        "carbs": 79.6,
+        "notes": "",
+        "unitWeight": 48,
+        "unitCalories": 208.27
       },
       {
         "name": "بسكوت فريسكا بالشكولاته",
@@ -1065,6 +1169,16 @@
         "unitWeight": 34,
         "unitCalories": 167.96
       },
+      { 
+        "name": "بسكويت أونيرو بالشكولاته ساندويتش",
+        "calories": 546,
+        "protein": 5,
+        "fat": 34,
+        "carbs": 56,
+        "notes": "وزن الواحده 18 جرام",
+        "unitWeight": 36,
+        "unitCalories": 196.56
+      },
       {
         "name": "بسكوت ٥&٥ صوابع",
         "calories": 382,
@@ -1086,6 +1200,16 @@
         "unitCalories": 185.37
       },
       {
+        "name": "بسكوت water rolls ويفر رولز صوابع",
+        "calories": 500,
+        "protein": 10,
+        "fat": 25,
+        "carbs": 60,
+        "notes": "وزن الواحده 6 جرام و 20 جرام من السكريات المضافة",
+        "unitWeight": 64,
+        "unitCalories": 320
+      },
+      {
         "name": "كيكة توداى بالشكولاته",
         "calories": 339,
         "protein": 5,
@@ -1101,7 +1225,9 @@
         "protein": 4.37,
         "fat": 8.6,
         "carbs": 60.5,
-        "notes": ""
+        "notes": "",
+        "unitWeight": 50,
+        "unitCalories": 168.9
       },
       {
         "name": "كيكة تاو تاو بالفراولة",
@@ -1174,6 +1300,26 @@
         "unitCalories": 253.87
       },
       {
+        "name": "كيكة توداي جولديز",
+        "calories": 427.5,
+        "protein": 21.9,
+        "fat": 21.9,
+        "carbs": 54.2,
+        "notes": "",
+        "unitWeight": 24,
+        "unitCalories": 102.6
+      },
+      {
+        "name": "كيكة تورتا رولز",
+        "calories": 409,
+        "protein": 3.6,
+        "fat": 18.45,
+        "carbs": 57.33,
+        "notes": "38.25 جرام سكريات مضافة",
+        "unitWeight": 24,
+        "unitCalories": 98.16
+      },
+      {
         "name": "جهينه بودينج",
         "calories": 127,
         "protein": null,
@@ -1202,6 +1348,56 @@
         "notes": "السكر المضاف0 جرام"
       },
       {
+        "name": "كوكيز بالشكولاته العبد",
+        "calories": 415,
+        "protein": 6.51,
+        "fat": 6.2,
+        "carbs": 83.65,
+        "notes": "",
+        "unitWeight": 30,
+        "unitCalories": 124.5
+      },
+      {
+        "name": "كوكيز بالشكولاته بلبن",
+        "calories": 498,
+        "protein": 6.14,
+        "fat": 23.14,
+        "carbs": 66.4,
+        "notes": "وتتضمن 28.17 جرام سكريات مضافة",
+        "unitWeight": 28,
+        "unitCalories": 139.44
+      },
+      {
+        "name": "شكولاته كيت كات دارك",
+        "calories": 500,
+        "protein": 5.6,
+        "fat": 25.8,
+        "carbs": 58.6,
+        "notes": "وزن الواحده 11 جرام و 40.0 جرام سكريات مضافة",
+        "unitWeight": 42,
+        "unitCalories": 210
+      },
+      {
+        "name": "شكولاته كتاكيتو",
+        "calories": 525,
+        "protein": 9.6,
+        "fat": 29.9,
+        "carbs": 57.8,
+        "notes": "",
+        "unitWeight": 40,
+        "unitCalories": 210
+      },
+      {
+        "name": "شوكولاتة سنيكرز",
+        "calories": 482,
+        "protein": null,
+        "fat": 22.6,
+        "carbs": null,
+        "notes": "",
+        "unitWeight": 50,
+        "unitCalories": 241
+      },
+      {
         "name": "بونبونى سكتش منت",
         "calories": 396,
         "protein": 0,
@@ -1210,6 +1406,16 @@
         "notes": "السكر المضاف  95 جرام و وزن الواحده 3 جرام",
         "unitWeight": 15,
         "unitCalories": 59.4
+      },
+      {
+        "name": "لبان كلوريتس",
+        "calories": 308,
+        "protein": 0.1,
+        "fat": 0,
+        "carbs": 76,
+        "notes": "",
+        "unitWeight": 2,
+        "unitCalories": 6.16
       }
     ]
   }
