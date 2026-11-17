@@ -690,6 +690,14 @@
         "fat": 0.1,
         "carbs": 37,
         "notes": "وزن الواحده 24جرام"
+      },
+      {
+        "name": "بلح البرحى الاصفر الصغير",
+        "calories": 277,
+        "protein": 1.8,
+        "fat": 0.15,
+        "carbs": 75,
+        "notes": "وزن الواحده 15 جرام"
       }
     ],
     "icecreams": [
@@ -1169,7 +1177,7 @@
         "unitWeight": 34,
         "unitCalories": 167.96
       },
-      { 
+      {
         "name": "بسكويت أونيرو بالشكولاته ساندويتش",
         "calories": 546,
         "protein": 5,
@@ -1416,6 +1424,26 @@
         "notes": "",
         "unitWeight": 2,
         "unitCalories": 6.16
+      },
+      {
+        "name": "كرواسون دومتي بالشكولاته",
+        "calories": 415,
+        "protein": 8,
+        "fat": 22.4,
+        "carbs": 46.2,
+        "notes": "14 جرام سكريات مضافة",
+        "unitWeight": null,
+        "unitCalories": null
+      },
+      {
+        "name": "كرواسون مولتو ماجنم بالشكولاته",
+        "calories": 465,
+        "protein": 7,
+        "fat": 27,
+        "carbs": 49,
+        "notes": "",
+        "unitWeight": 85,
+        "unitCalories": 395.25
       }
     ]
   }
