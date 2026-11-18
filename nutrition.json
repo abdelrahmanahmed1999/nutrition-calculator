@@ -910,7 +910,7 @@
         "unitCalories": 227.5
       },
       {
-        "name": "بسكوت ماكفتيز شاى",
+        "name": "بسكوت دايجستف شاى",
         "calories": 481,
         "protein": 7.2,
         "fat": 21,
@@ -948,6 +948,26 @@
         "notes": "السكريات المضافة 23 جرام",
         "unitWeight": 62,
         "unitCalories": 297.6
+      },
+      {
+        "name": "بسكوت السعاده ساده للشاى",
+        "calories": 441,
+        "protein": 9.3,
+        "fat": 10.8,
+        "carbs": 77.2,
+        "notes": "السكر المضاف 33.7",
+        "unitWeight": 60,
+        "unitCalories": 264.6
+      },
+      {
+        "name": "بسكوت اهلاوى للشاى",
+        "calories": 440,
+        "protein": 9.3,
+        "fat": 10.4,
+        "carbs": 77.2,
+        "notes": "السكر المضاف 33.7",
+        "unitWeight": 48,
+        "unitCalories": 211.2
       },
       {
         "name": "بسكوت بسكريم",
@@ -1178,6 +1198,16 @@
         "unitCalories": 167.96
       },
       {
+        "name": "ساندوتش دايجستف بالشكولاته",
+        "calories": 495,
+        "protein": 6,
+        "fat": 24.2,
+        "carbs": 60.8,
+        "notes": "",
+        "unitWeight": 28,
+        "unitCalories": 138.6
+      },
+      {
         "name": "بسكويت أونيرو بالشكولاته ساندويتش",
         "calories": 546,
         "protein": 5,
@@ -1361,7 +1391,7 @@
         "protein": 6.51,
         "fat": 6.2,
         "carbs": 83.65,
-        "notes": "",
+        "notes": "وزن الواحده 15 جرام",
         "unitWeight": 30,
         "unitCalories": 124.5
       },
@@ -1371,7 +1401,7 @@
         "protein": 6.14,
         "fat": 23.14,
         "carbs": 66.4,
-        "notes": "وتتضمن 28.17 جرام سكريات مضافة",
+        "notes": "وزن الواحده 15 جرام وتتضمن 28.17 جرام سكريات مضافة",
         "unitWeight": 28,
         "unitCalories": 139.44
       },
