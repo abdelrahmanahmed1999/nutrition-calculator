@@ -1180,6 +1180,26 @@
         "unitCalories": 211.2
       },
       {
+        "name": "بسكوت بلياتشو ساده شاى",
+        "calories": 441,
+        "protein": 9.3,
+        "fat": 10.6,
+        "carbs": 77,
+        "notes": "وزن الواحده 6 جرام و السكر المضاف 33.7",
+        "unitWeight": 72,
+        "unitCalories": 317.52
+      },
+      {
+        "name": "بسكوت again ساده شاى",
+        "calories": 432,
+        "protein": 5.3,
+        "fat": 11,
+        "carbs": 80,
+        "notes": "السكر المضاف 24 جرام",
+        "unitWeight": 50,
+        "unitCalories": 216
+      },
+      {
         "name": "بسكوت بسكريم",
         "calories": 502,
         "protein": 8,
@@ -1378,6 +1398,16 @@
         "unitCalories": 299
       },
       {
+        "name": "بسكوت شاتو بالشكولاته",
+        "calories": 520,
+        "protein": 7.4,
+        "fat": 25,
+        "carbs": 64,
+        "notes": "وزن الواحده 12 جرام و السكر المضاف 27 جرام",
+        "unitWeight": 155,
+        "unitCalories": 806
+      },
+      {
         "name": "بسكوت فريسكا بالشكولاته قطعه واحده",
         "calories": 515,
         "protein": 4,
@@ -1456,6 +1486,16 @@
         "notes": "",
         "unitWeight": 42,
         "unitCalories": 126
+      },
+      {
+        "name": "ساندويتش BeHappy",
+        "calories": 306,
+        "protein": 5.88,
+        "fat": 13,
+        "carbs": 41.1,
+        "notes": "",
+        "unitWeight": 22,
+        "unitCalories": 67.32
       },
       {
         "name": "بسكوت ٥&٥ صوابع",
@@ -1674,6 +1714,16 @@
         "notes": "",
         "unitWeight": 50,
         "unitCalories": 241
+      },
+        {
+        "name": "شكولاته جالكسي فلوتس",
+        "calories": 507,
+        "protein": 7.4,
+        "fat": 25,
+        "carbs": 63,
+        "notes": "السكر المضاف 44 جرام",
+        "unitWeight": 11.25,
+        "unitCalories": 57.04
       },
       {
         "name": "بونبونى سكتش منت",
