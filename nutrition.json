@@ -548,6 +548,22 @@
         "fat": 4.5,
         "carbs": 78,
         "notes": "فى مايكروويف"
+      },
+      {
+        "name": "فاصوليا بيضاء",
+        "calories": 140,
+        "protein": 9,
+        "fat": 0.6,
+        "carbs": 25,
+        "notes": ""
+      },
+      {
+        "name": "اللوبيا",
+        "calories": 116,
+        "protein": 7.7,
+        "fat": 0.5,
+        "carbs": 20.8,
+        "notes": ""
       }
     ],
     "لحوم": [
@@ -690,14 +706,6 @@
         "notes": ""
       },
       {
-        "name": "فاصوليا بيضاء",
-        "calories": 140,
-        "protein": 9,
-        "fat": 0.6,
-        "carbs": 25,
-        "notes": ""
-      },
-      {
         "name": "بطاطا",
         "calories": 90,
         "protein": 2,
@@ -719,14 +727,6 @@
         "protein": 1.1,
         "fat": 0.1,
         "carbs": 9.3,
-        "notes": ""
-      },
-      {
-        "name": "اللوبيا",
-        "calories": 116,
-        "protein": 7.7,
-        "fat": 0.5,
-        "carbs": 20.8,
         "notes": ""
       },
       {
