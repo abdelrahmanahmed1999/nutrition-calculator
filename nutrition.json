@@ -674,7 +674,7 @@
         "notes": ""
       },
       {
-        "name": "فلفل أخضر",
+        "name": "فلفل أخضر رومى",
         "calories": 20,
         "protein": 0.9,
         "fat": 0.2,
@@ -799,6 +799,14 @@
         "protein": 3.1,
         "fat": 0.5,
         "carbs": 5.1,
+        "notes": ""
+      },
+      {
+        "name": "الفلفل الألوان",
+        "calories": 31,
+        "protein": 1,
+        "fat": 0.3,
+        "carbs": 6.3,
         "notes": ""
       }
     ],
