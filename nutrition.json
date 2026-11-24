@@ -981,7 +981,22 @@
       }
     ],
     "Protein Bars": [
-
+      {
+        "name": "Melty Protein Bar (كراميل مملح)",
+        "calories": 370,
+        "protein": 31.5,
+        "fat": 10,
+        "carbs": 37.5,
+        "notes": "وزن البار 70 جرام"
+      },
+      {
+        "name": "Pro Protein Bar (قهوة)",
+        "calories": 320,
+        "protein": 33.33,
+        "fat": 6.67,
+        "carbs": 31.67,
+        "notes": "وزن البار 60 جرام"
+      }
     ],
     "icecreams": [
       {
