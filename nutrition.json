@@ -434,6 +434,22 @@
         "fat": 15,
         "carbs": 7,
         "notes": "وزن الواحده 20 جرام"
+      },
+      {
+        "name": "نوتيلا blaban",
+        "calories": 541,
+        "protein": 4,
+        "fat": 31,
+        "carbs": 60,
+        "notes": ""
+      },
+      {
+        "name": "نوتيلا maxtela",
+        "calories": 540,
+        "protein": 4.2,
+        "fat": 33.5,
+        "carbs": 58.9,
+        "notes": "السكر المضاف 50.5 جرام"
       }
     ],
     "بقوليات": [
@@ -1409,7 +1425,7 @@
         "protein": 5.3,
         "fat": 11.4,
         "carbs": 79.6,
-        "notes": "",
+        "notes": "وزن الواحده 8 جرام",
         "unitWeight": 48,
         "unitCalories": 208.27
       },
@@ -1800,7 +1816,7 @@
         "unitCalories": 139.44
       },
       {
-        "name": "شكولاته كيت كات دارك",
+        "name": "شكولاته كيت كات داركKitKat",
         "calories": 500,
         "protein": 5.6,
         "fat": 25.8,
@@ -1820,7 +1836,7 @@
         "unitCalories": 210
       },
       {
-        "name": "شوكولاتة سنيكرز",
+        "name": "شوكولاتة Snickers",
         "calories": 482,
         "protein": null,
         "fat": 22.6,
@@ -1830,7 +1846,7 @@
         "unitCalories": 241
       },
       {
-        "name": "شكولاته جالكسي فلوتس",
+        "name": "شكولاته جالكسي Flutes",
         "calories": 507,
         "protein": 7.4,
         "fat": 25,
@@ -1878,6 +1894,36 @@
         "notes": "",
         "unitWeight": 85,
         "unitCalories": 395.25
+      },
+      {
+        "name": "شكولاته Bounty",
+        "calories": 504,
+        "protein": 6.84,
+        "fat": 23.9,
+        "carbs": 68.3,
+        "notes": "السكر المضاف 42 جرام",
+        "unitWeight": 11.7,
+        "unitCalories": 58.97
+      },
+      {
+        "name": "شكولاته Twix",
+        "calories": 506,
+        "protein": 7.1,
+        "fat": 26.6,
+        "carbs": 71.1,
+        "notes": "السكر المضاف 44 جرام",
+        "unitWeight": 11.25,
+        "unitCalories": 56.92
+      },
+      {
+        "name": "بسكوت كفاءة بالشكولاته",
+        "calories": 492,
+        "protein": 4.8,
+        "fat": 26,
+        "carbs": 62,
+        "notes": "وزن البار 7 جرام و السكر المضاف 32 جرام",
+        "unitWeight": 34,
+        "unitCalories": 167.28
       }
     ]
   }
