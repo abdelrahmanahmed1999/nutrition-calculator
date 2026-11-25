@@ -1303,7 +1303,7 @@
         "protein": 9.3,
         "fat": 10.8,
         "carbs": 77.2,
-        "notes": "السكر المضاف 33.7",
+        "notes": "وزن الواحده 7 جرام و السكر المضاف 33.7",
         "unitWeight": 60,
         "unitCalories": 264.6
       },
@@ -1333,7 +1333,7 @@
         "protein": 5.3,
         "fat": 11,
         "carbs": 80,
-        "notes": "السكر المضاف 24 جرام",
+        "notes": "وزن الواحده 6 جرام و السكر المضاف 24 جرام",
         "unitWeight": 50,
         "unitCalories": 216
       },
@@ -1531,7 +1531,7 @@
         "protein": 5.4,
         "fat": 18.2,
         "carbs": 68.5,
-        "notes": "",
+        "notes": "الواحده 9 جرام",
         "unitWeight": 65,
         "unitCalories": 299
       },
@@ -1631,7 +1631,7 @@
         "protein": 5.88,
         "fat": 13,
         "carbs": 41.1,
-        "notes": "",
+        "notes": "الواحده 11 جرام",
         "unitWeight": 22,
         "unitCalories": 67.32
       },
@@ -1701,7 +1701,7 @@
         "protein": 4.37,
         "fat": 8.6,
         "carbs": 60.5,
-        "notes": "",
+        "notes": "الواحده 16 جرام",
         "unitWeight": 50,
         "unitCalories": 168.9
       },
