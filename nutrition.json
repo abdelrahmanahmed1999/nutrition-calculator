@@ -1478,16 +1478,6 @@
         "unitCalories": 146.1
       },
       {
-        "name": "بسكوت بلوكس بالشكولاته",
-        "calories": 510,
-        "protein": 4.7,
-        "fat": 257,
-        "carbs": 63.9,
-        "notes": "وزن الواحده 4 جرام و السكر المضاف 31 جرام",
-        "unitWeight": 28,
-        "unitCalories": 142.8
-      },
-      {
         "name": "بسكوت ديما بالفراولة",
         "calories": 482,
         "protein": 8,
@@ -1634,6 +1624,16 @@
         "notes": "وزن الواحده 9 جرام",
         "unitWeight": 48,
         "unitCalories": 244.32
+      },
+      {
+        "name": "بسكوت بلوكس بالشكولاته",
+        "calories": 510,
+        "protein": 4.7,
+        "fat": 257,
+        "carbs": 63.9,
+        "notes": "وزن الواحده 4 جرام و السكر المضاف 31 جرام",
+        "unitWeight": 28,
+        "unitCalories": 142.8
       },
       {
         "name": "بسكوت biskao taw بالشكولاته",
