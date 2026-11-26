@@ -660,6 +660,14 @@
         "fat": 0.5,
         "carbs": 20.8,
         "notes": ""
+      },
+      {
+        "name": "شعرية",
+        "calories": 140,
+        "protein": 5,
+        "fat": 1,
+        "carbs": 28,
+        "notes": ""
       }
     ],
     "لحوم": [
@@ -903,6 +911,14 @@
         "protein": 1,
         "fat": 0.3,
         "carbs": 6.3,
+        "notes": ""
+      },
+      {
+        "name": "فاصوليا خضراء",
+        "calories": 33,
+        "protein": 2,
+        "fat": 0.3,
+        "carbs": 8,
         "notes": ""
       }
     ],
