@@ -514,6 +514,22 @@
         "fat": 15,
         "carbs": 10,
         "notes": "السكر المضاف 0 جرام"
+      },
+      {
+        "name": "للبن نيدو المجفف",
+        "calories": 444,
+        "protein": 17.5,
+        "fat": 18.6,
+        "carbs": 55.7,
+        "notes": "السكر المضاف1.1 جرام و الحصة الواحدة كوب 200 مل = 111 سعرة"
+      },
+      {
+        "name": "للبن افانتى المجفف",
+        "calories": 500,
+        "protein": 24,
+        "fat": 28,
+        "carbs": 38,
+        "notes": "السكر المضاف 0 جرام و الحصة الواحدة 30 جرام لعمل كوب 200 مل = 150 سعرة"
       }
     ],
     "بقوليات": [
@@ -1402,6 +1418,16 @@
         "unitCalories": 216
       },
       {
+        "name": "بسكوت four holes ساده شاى",
+        "calories": 408,
+        "protein": 7.4,
+        "fat": 8.8,
+        "carbs": 72.3,
+        "notes": "وزن الواحده 11 جرام",
+        "unitWeight": 63,
+        "unitCalories": 257.04
+      },
+      {
         "name": "بسكوت بسكريم",
         "calories": 502,
         "protein": 8,
@@ -1522,6 +1548,16 @@
         "unitCalories": 190.68
       },
       {
+        "name": "بسكوت Nice",
+        "calories": 463,
+        "protein": 6.4,
+        "fat": 17,
+        "carbs": 71,
+        "notes": "وزن الواحده 6 جرام و السكر المضاف 23 جرام",
+        "unitWeight": 36,
+        "unitCalories": 166.68
+      },
+      {
         "name": "بسكوت فريسكا بالشكولاته",
         "calories": 486,
         "protein": 4.1,
@@ -1588,6 +1624,16 @@
         "notes": "السكر المضاف 27.5 جرام و وزن الواحده 5 جرام",
         "unitWeight": 40,
         "unitCalories": 182.28
+      },
+      {
+        "name": "بسكوت love بالشكولاته",
+        "calories": 509,
+        "protein": 4.88,
+        "fat": 24.25,
+        "carbs": 67.7,
+        "notes": "وزن الواحده 9 جرام",
+        "unitWeight": 48,
+        "unitCalories": 244.32
       },
       {
         "name": "بسكوت biskao taw بالشكولاته",
@@ -1858,6 +1904,16 @@
         "notes": "38.25 جرام سكريات مضافة",
         "unitWeight": 24,
         "unitCalories": 98.16
+      },
+      {
+        "name": "كيكة Razz بالفانيليا",
+        "calories": 438,
+        "protein": 4,
+        "fat": 22,
+        "carbs": 56,
+        "notes": "السكر المضاف 24 جرام",
+        "unitWeight": 34,
+        "unitCalories": 148.92
       },
       {
         "name": "جهينه بودينج",
