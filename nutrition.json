@@ -2084,6 +2084,16 @@
         "notes": "",
         "unitWeight": 85,
         "unitCalories": 395.25
+      },
+      {
+        "name": "كوكيز بالشكولاته اونيرو",
+        "calories": 477,
+        "protein": 3.8,
+        "fat": 30,
+        "carbs": 47,
+        "notes": "وزن الواحده ٢٠ جرام",
+        "unitWeight": 40,
+        "unitCalories": 190.8
       }
     ]
   }
