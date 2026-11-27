@@ -184,6 +184,14 @@
         "fat": 22,
         "carbs": 47,
         "notes": ""
+      },
+      {
+        "name": "عيش YJF best",
+        "calories": 240,
+        "protein": 10,
+        "fat": 10,
+        "carbs": 150,
+        "notes": "وزن الكيس 150 جرام"
       }
     ],
     "بقالة ألبان وجبن": [
@@ -1320,6 +1328,16 @@
         "notes": "",
         "unitWeight": 100,
         "unitCalories": 442
+      },
+      {
+        "name": "فشار funday بالكراميل",
+        "calories": 390,
+        "protein": 3.3,
+        "fat": 20,
+        "carbs": 66.7,
+        "notes": "",
+        "unitWeight": 50,
+        "unitCalories": 195
       }
     ],
     "حلويات": [
@@ -2110,6 +2128,36 @@
         "notes": "وزن الواحده ٢٠ جرام",
         "unitWeight": 40,
         "unitCalories": 190.8
+      },
+      {
+        "name": "ساندويتش فريسكا بالشكولاته",
+        "calories": 511,
+        "protein": 8.7,
+        "fat": 26,
+        "carbs": 61,
+        "notes": "",
+        "unitWeight": 20,
+        "unitCalories": 102.2
+      },
+      {
+        "name": "شكولاته كادبورى دايرى ميلك",
+        "calories": 533,
+        "protein": 8.3,
+        "fat": 30,
+        "carbs": 58.3,
+        "notes": "السكر المضاف  ٤٣.٣ جرام",
+        "unitWeight": 6,
+        "unitCalories": 31.98
+      },
+      {
+        "name": "شكولاته جالاكسى كرسبى",
+        "calories": 531,
+        "protein": 6.5,
+        "fat": 29,
+        "carbs": 60,
+        "notes": "",
+        "unitWeight": 14,
+        "unitCalories": 74.34
       }
     ]
   }
